@@ -2,6 +2,7 @@ package com.kh.view;
 
 import com.kh.controller.ExportUser;
 import com.kh.controller.ImportUser;
+import com.kh.controller.Inquiry;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -31,10 +32,12 @@ public class User extends JFrame implements ActionListener {
     private ImageIcon outReportImage = new ImageIcon("images/outReport.png");
     private ImageIcon inReportImage = new ImageIcon("images/inReport.png");
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private ImageIcon accuseinquiryImage = new ImageIcon("images/신고조회.png");
 
     private JButton quitButton = new JButton(quitImage);
     private JButton outReportButton = new JButton(outReportImage);
     private JButton inReportButton = new JButton(inReportImage);
+    private JButton accuseinquiryButton = new JButton(accuseinquiryImage);
 
     public User() {
         JPanel pan = new JPanel();
@@ -136,7 +139,32 @@ public class User extends JFrame implements ActionListener {
 
         });
 
+        add(accuseinquiryButton);
+        accuseinquiryButton.setBounds(400, 260, 150, 75);
+        accuseinquiryButton.setBorderPainted(false);
+        accuseinquiryButton.setContentAreaFilled(false);
+        accuseinquiryButton.setFocusPainted(false);
+
+        accuseinquiryButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                accuseinquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                dispose();
+
+                new Inquiry();
+            }
+        });
+
+
         add(lp);
+
+
 
     }
 
