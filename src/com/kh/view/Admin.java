@@ -40,6 +40,7 @@ public class Admin extends JFrame implements ActionListener {
     private JButton inOutSetButton = new JButton(inOutSetImage);
     private JButton informationButton = new JButton(informationImage);
 
+
     public Admin() {
 
         // setUndecorated(true);
@@ -108,6 +109,7 @@ public class Admin extends JFrame implements ActionListener {
 
             @Override
             public void mousePressed(MouseEvent e) {
+
                 dispose();
 
                 new ExportAdmin();
@@ -158,7 +160,7 @@ public class Admin extends JFrame implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 dispose();
 
-                new InfoSearch();
+                new Inquiry();
             }
 
         });

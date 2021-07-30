@@ -3,15 +3,15 @@ package com.kh.model.vo;
 import java.io.Serializable;
 
 public class Info implements Serializable {
-
-   private String item;
-   private String sort;
-   private String quantity;
-   private String price;
-   private String user;
-   private String phoneNum;
-   private String departure;
-   private String arrival;
+    private String taskNum;
+    private String item;
+    private String sort;
+    private String quantity;
+    private String price;
+    private String user;
+    private String phoneNum;
+    private String departure;
+    private String arrival;
 
 
     public Info() {
@@ -32,8 +32,17 @@ public class Info implements Serializable {
                 '}';
     }
 
-    public Info(String item, String sort, String quantity, String price, String user, String phoneNum,
+    public String getTaskNum() {
+        return taskNum;
+    }
+
+    public void setTaskNum(String taskNum) {
+        this.taskNum = taskNum;
+    }
+
+    public Info(String taskNum, String item, String sort, String quantity, String price, String user, String phoneNum,
                 String departure, String arrival) {
+        this.taskNum = taskNum;
         this.item = item;
         this.sort = sort;
         this.quantity = quantity;
@@ -42,6 +51,7 @@ public class Info implements Serializable {
         this.phoneNum = phoneNum;
         this.departure = departure;
         this.arrival = arrival;
+
 
     }
 
@@ -110,5 +120,4 @@ public class Info implements Serializable {
     }
 
 
-
-    }
+}

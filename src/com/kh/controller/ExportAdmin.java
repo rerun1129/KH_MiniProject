@@ -2,9 +2,7 @@ package com.kh.controller;
 
 
 import com.kh.model.dao.FileIO;
-import com.kh.model.vo.ExportAllowInfo;
-import com.kh.model.vo.ImportAllowInfo;
-import com.kh.model.vo.Info;
+import com.kh.model.vo.*;
 import com.kh.view.Admin;
 
 import javax.swing.*;
@@ -15,6 +13,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class ExportAdmin extends JFrame {
 
@@ -28,17 +27,19 @@ public class ExportAdmin extends JFrame {
     //todo 나가기는 홈화면
 
 
-    private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival, imLimit, imNot;
+    private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival;
     private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accept, cancel;
 
-    ArrayList<ExportAllowInfo> infoArray = new ArrayList<>();
 
-    FileIO fio = new FileIO();
+    private String[] lines = new String[100];
+    private String[] lineArr;
 
     public ExportAdmin() {
 
         super("수출허가");
+
+
         setLayout(null);
         setResizable(false);
 
@@ -60,7 +61,6 @@ public class ExportAdmin extends JFrame {
         arrival = new JLabel("•도착지 : ");
 
 
-
         nameT = new JTextField(20);
         sortT = new JTextField(20);
         quantityT = new JTextField(20);
@@ -73,9 +73,8 @@ public class ExportAdmin extends JFrame {
         cancel = new JButton();
 
 
-
         accept = new JButton("신고처리");
-        cancel = new JButton("취소");
+        cancel = new JButton("불허");
 
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
@@ -85,7 +84,6 @@ public class ExportAdmin extends JFrame {
         phoneNum.setBounds(20, 320, 400, 25);
         departure.setBounds(20, 360, 400, 25);
         arrival.setBounds(20, 400, 400, 25);
-
 
 
         nameT.setBounds(200, 120, 700, 25);
@@ -99,7 +97,6 @@ public class ExportAdmin extends JFrame {
 
         accept.setBounds(620, 450, 100, 30);
         cancel.setBounds(780, 450, 100, 30);
-
 
 
         JPanel panel = new JPanel();
@@ -127,6 +124,14 @@ public class ExportAdmin extends JFrame {
         departure.setForeground(Color.white);
         arrival.setForeground(Color.white);
 
+        nameT.setEditable(false);
+        sortT.setEditable(false);
+        quantityT.setEditable(false);
+        priceT.setEditable(false);
+        userT.setEditable(false);
+        phoneNumT.setEditable(false);
+        departureT.setEditable(false);
+        arrivalT.setEditable(false);
 
         add(name);
         add(sort);
@@ -150,6 +155,7 @@ public class ExportAdmin extends JFrame {
         add(cancel);
         add(panel);
 
+        fileIn();
 
         panel.setBounds(0, 0, 960, 550);
 
@@ -165,8 +171,8 @@ public class ExportAdmin extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try (BufferedReader br = new BufferedReader(new FileReader("exportLimit.txt"))) {
                     String str;
-                    while ((str = br.readLine()) != null){
-                        if(str.equals(sortT.getText())){
+                    while ((str = br.readLine()) != null) {
+                        if (str.equals(sortT.getText())) {
                             JOptionPane.showMessageDialog(null, "수출제한 물품입니다.");
                             break;
                         }
@@ -177,8 +183,8 @@ public class ExportAdmin extends JFrame {
 
                 try (BufferedReader br = new BufferedReader(new FileReader("exportInhibit.txt"))) {
                     String str;
-                    while ((str = br.readLine()) != null){
-                        if(str.equals(sortT.getText())){
+                    while ((str = br.readLine()) != null) {
+                        if (str.equals(sortT.getText())) {
                             JOptionPane.showMessageDialog(null, "수출금지 물품입니다.");
                             break;
                         }
@@ -205,6 +211,47 @@ public class ExportAdmin extends JFrame {
             new Admin();
 
         });
+    }
+
+
+    public void fileIn() {
+
+        File file = new File("exportInfo.dat");
+        int i = 0;
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            int number = Integer.parseInt(JOptionPane.showInputDialog("처리할 신고 번호를 입력하세요."));
+
+                lineArr = lines[number - 1].split("/");
+
+                nameT.setText(lineArr[1]);
+                sortT.setText(lineArr[2]);
+                quantityT.setText(lineArr[3]);
+                priceT.setText(lineArr[4]);
+                userT.setText(lineArr[5]);
+                phoneNumT.setText(lineArr[6]);
+                departureT.setText(lineArr[7]);
+                arrivalT.setText(lineArr[8]);
+
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
+            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
+            System.exit(0);
+
+        }
     }
 }
 

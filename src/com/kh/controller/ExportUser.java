@@ -1,10 +1,13 @@
 package com.kh.controller;
 
+import com.kh.model.vo.ExportAccuseInfo;
 import com.kh.view.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -15,11 +18,12 @@ public class ExportUser extends JFrame {
     //Todo 3. 확인 누르면 창이 꺼지면서 다시 어드민 홈 화면으로 가기 / 취소누르면 다시 허가화면으로 가기
 
 
-
-    private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival, imLimit, imNot;
-    private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
+    private JLabel taskNum, name, sort, quantity, price, user, phoneNum, departure, arrival;
+    private JTextField taskNumT, nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accuse, cancel;
 
+    private String[] lines = new String[100];
+    private String[] lineArr;
 
     public ExportUser() {
 
@@ -31,11 +35,10 @@ public class ExportUser extends JFrame {
         JLabel label = new JLabel();
 
 
-
         Font f = new Font("맑은 고딕", Font.BOLD, 20);
         Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
-
+        taskNum = new JLabel("•신고 번호 : ");
         name = new JLabel("•물품명 : ");
         sort = new JLabel("•종류 : ");
         quantity = new JLabel("•수량 : ");
@@ -45,8 +48,7 @@ public class ExportUser extends JFrame {
         departure = new JLabel("•출발지 : ");
         arrival = new JLabel("•도착지 : ");
 
-
-
+        taskNumT = new JTextField(20);
         nameT = new JTextField(20);
         sortT = new JTextField(20);
         quantityT = new JTextField(20);
@@ -60,7 +62,7 @@ public class ExportUser extends JFrame {
         accuse = new JButton("신고");
         cancel = new JButton("취소");
 
-
+        taskNum.setBounds(20, 80, 400, 25);
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
         quantity.setBounds(20, 200, 400, 25);
@@ -70,8 +72,7 @@ public class ExportUser extends JFrame {
         departure.setBounds(20, 360, 400, 25);
         arrival.setBounds(20, 400, 400, 25);
 
-
-
+        taskNumT.setBounds(200, 80, 700, 25);
         nameT.setBounds(200, 120, 700, 25);
         sortT.setBounds(200, 160, 700, 25);
         quantityT.setBounds(200, 200, 700, 25);
@@ -97,6 +98,7 @@ public class ExportUser extends JFrame {
         arrival.setFont(f);
         accuse.setFont(g);
         cancel.setFont(g);
+        taskNum.setFont(f);
 
         name.setForeground(Color.white);
         sort.setForeground(Color.white);
@@ -106,8 +108,9 @@ public class ExportUser extends JFrame {
         phoneNum.setForeground(Color.white);
         departure.setForeground(Color.white);
         arrival.setForeground(Color.white);
+        taskNum.setForeground(Color.white);
 
-
+        taskNumT.setEditable(false);
 
         add(name);
         add(sort);
@@ -125,11 +128,15 @@ public class ExportUser extends JFrame {
         add(phoneNumT);
         add(departureT);
         add(arrivalT);
+        add(taskNum);
+        add(taskNumT);
 
 
         add(accuse);
         add(cancel);
         add(panel);
+
+        autoIncrement();
 
         label.setIcon(new ImageIcon(img));
 
@@ -143,12 +150,31 @@ public class ExportUser extends JFrame {
 
         accuse.addActionListener(e -> {
 
-            JOptionPane.showMessageDialog(null,"수출신고가 완료되었습니다.");
+            JOptionPane.showMessageDialog(null, "수출신고가 완료되었습니다.");
+
+            File file = new File("exportInfo.dat");
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+
+                bw.write(taskNumT.getText() + "/");
+                bw.write(nameT.getText() + "/");
+                bw.write(sortT.getText() + "/");
+                bw.write(quantityT.getText() + "/");
+                bw.write(priceT.getText() + "/");
+                bw.write(userT.getText() + "/");
+                bw.write(phoneNumT.getText() + "/");
+                bw.write(departureT.getText() + "/");
+                bw.write(arrivalT.getText());
+                bw.write("\r\n");
+                bw.flush();
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
 
             dispose();
 
             new User();
-
 
         });
 
@@ -160,7 +186,31 @@ public class ExportUser extends JFrame {
             new User();
 
         });
+    }
 
+    public void autoIncrement() {
+
+        File file = new File("exportInfo.dat");
+        int i = 0;
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+
+            lineArr = lines[i-1].split("/");
+
+            int temp = Integer.parseInt(lineArr[0])+1;
+            String fin = String.valueOf(temp);
+            taskNumT.setText(fin);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

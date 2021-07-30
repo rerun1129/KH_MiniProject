@@ -20,15 +20,16 @@ public class ImportAdmin extends JFrame {
     private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accept, cancel;
 
-    ArrayList<ImportAllowInfo> infoArray = new ArrayList<>();
-
-    FileIO fio = new FileIO();
+    private String[] lines = new String[100];
+    private String[] lineArr;
 
     public ImportAdmin() {
 
         super("수입허가");
         setLayout(null);
         setResizable(false);
+
+
 
         Image img = new ImageIcon("images/수입허가.png").getImage().getScaledInstance(960, 640, 0);
         JLabel label = new JLabel();
@@ -61,7 +62,7 @@ public class ImportAdmin extends JFrame {
 
 
         accept = new JButton("신고처리");
-        cancel = new JButton("취소");
+        cancel = new JButton("불허");
 
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
@@ -112,6 +113,7 @@ public class ImportAdmin extends JFrame {
         arrival.setForeground(Color.white);
 
 
+
         add(name);
         add(sort);
         add(quantity);
@@ -134,6 +136,7 @@ public class ImportAdmin extends JFrame {
         add(cancel);
         add(panel);
 
+        fileIn();
 
         panel.setBounds(0, 0, 960, 550);
 
@@ -152,7 +155,6 @@ public class ImportAdmin extends JFrame {
                     while ((str = br.readLine()) != null){
                         if(str.equals(sortT.getText())){
                             JOptionPane.showMessageDialog(null, "수입제한 물품입니다.");
-
                             break;
                         }
                     }
@@ -190,6 +192,46 @@ public class ImportAdmin extends JFrame {
             new Admin();
 
         });
+    }
+
+    public void fileIn() {
+
+        File file = new File("importInfo.dat");
+        int i = 0;
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            int number = Integer.parseInt(JOptionPane.showInputDialog("처리할 신고 번호를 입력하세요."));
+
+            lineArr = lines[number - 1].split("/");
+
+            nameT.setText(lineArr[1]);
+            sortT.setText(lineArr[2]);
+            quantityT.setText(lineArr[3]);
+            priceT.setText(lineArr[4]);
+            userT.setText(lineArr[5]);
+            phoneNumT.setText(lineArr[6]);
+            departureT.setText(lineArr[7]);
+            arrivalT.setText(lineArr[8]);
+
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
+            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
+            System.exit(0);
+
+        }
     }
 }
 

@@ -70,57 +70,57 @@ public class ManagerIE extends JFrame implements ActionListener {
 
         addBtn1 = new JButton("추가");
         addBtn1.addActionListener(e -> {
-
             ll.EL(exLimitT.getText());
+            exLimitT.setText("");
         });
 
 
         addBtn2 = new JButton("추가");
         addBtn2.addActionListener(e -> {
-
             ll.IL(imLimitT.getText());
+            imLimitT.setText("");
         });
 
 
         addBtn3 = new JButton("추가");
         addBtn3.addActionListener(e -> {
-
             ll.EI(exNotT.getText());
+            exNotT.setText("");
         });
 
 
         addBtn4 = new JButton("추가");
         addBtn4.addActionListener(e -> {
-
             ll.II(imNotT.getText());
+            imNotT.setText("");
         });
 
 
         delBtn1 = new JButton("삭제");
         delBtn1.addActionListener(e -> {
             ll.ELD(exLimitT.getText());
+            exLimitT.setText("");
         });
 
 
         delBtn2 = new JButton("삭제");
         delBtn2.addActionListener(e -> {
-
             ll.ILD(imLimitT.getText());
+            imLimitT.setText("");
         });
 
 
         delBtn3 = new JButton("삭제");
         delBtn3.addActionListener(e -> {
             ll.EID(exNotT.getText());
-
+            exNotT.setText("");
         });
 
 
         delBtn4 = new JButton("삭제");
         delBtn4.addActionListener(e -> {
-
             ll.IID(imNotT.getText());
-
+            imNotT.setText("");
         });
 
 
@@ -193,6 +193,7 @@ public class ManagerIE extends JFrame implements ActionListener {
         add(imLimitT);
         add(exNotT);
         add(imNotT);
+
 
 
         add(addBtn1);

@@ -15,7 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
+import com.kh.view.Admin;
 
 public class InfoSearch extends JFrame {
     //	private JLabel sort, user, departure, arrival;
@@ -35,20 +36,20 @@ public class InfoSearch extends JFrame {
         Font f = new Font("맑은 고딕", Font.BOLD, 25);
         Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
-        sort = new JLabel("종류 조회");
-        user = new JLabel("사용자 조회");
-        depart = new JLabel("출발지 조회");
-        arrival = new JLabel("도착지 조회");
+        sort = new JLabel("•종류 조회");
+        user = new JLabel("•사용자 조회");
+        depart = new JLabel("•출발지 조회");
+        arrival = new JLabel("•도착지 조회");
 
         sortT = new JTextField(20);
         userT = new JTextField(20);
         departT = new JTextField(20);
         arrivalT = new JTextField(20);
 
-        sortBtn = new JButton("종류 조회");
-        userBtn = new JButton("신고자 조회");
-        departBtn = new JButton("출발지 조회");
-        arrivalBtn = new JButton("도착지 조회");
+        sortBtn = new JButton("조회");
+        userBtn = new JButton("조회");
+        departBtn = new JButton("조회");
+        arrivalBtn = new JButton("조회");
 
         ImageIcon myImg = new ImageIcon("images/quit.png");
         finish = new JButton(myImg);
@@ -105,6 +106,7 @@ public class InfoSearch extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감
+                new Admin();
             }
         });
 
@@ -113,15 +115,15 @@ public class InfoSearch extends JFrame {
         depart.setBounds(20, 280, 400, 25);
         arrival.setBounds(20, 340, 400, 25);
 
-        sortT.setBounds(250, 160, 550, 25);
-        userT.setBounds(250, 220, 550, 25);
-        departT.setBounds(250, 280, 550, 25);
-        arrivalT.setBounds(250, 340, 550, 25);
+        sortT.setBounds(250, 160, 500, 25);
+        userT.setBounds(250, 220, 500, 25);
+        departT.setBounds(250, 280, 500, 25);
+        arrivalT.setBounds(250, 340, 500, 25);
 
-        sortBtn.setBounds(830, 160, 100, 25);
-        userBtn.setBounds(830, 220, 200, 25);
-        departBtn.setBounds(830, 280, 100, 25);
-        arrivalBtn.setBounds(830, 340, 100, 25);
+        sortBtn.setBounds(830, 160, 80, 25);
+        userBtn.setBounds(830, 220, 80, 25);
+        departBtn.setBounds(830, 280, 80, 25);
+        arrivalBtn.setBounds(830, 340, 80, 25);
         finish.setBounds(400, 430, 150, 75);
 
         sort.setFont(f);
@@ -131,11 +133,8 @@ public class InfoSearch extends JFrame {
 
         sortBtn.setFont(g);
         userBtn.setFont(g);
-        userBtn.setHorizontalAlignment(SwingConstants.LEFT);
         departBtn.setFont(g);
-        departBtn.setHorizontalAlignment(SwingConstants.LEFT);
         arrivalBtn.setFont(g);
-        arrivalBtn.setHorizontalAlignment(SwingConstants.LEFT);
 
         sort.setForeground(Color.white);
         user.setForeground(Color.white);

@@ -85,6 +85,8 @@ public class Inquiry extends JFrame {
      			public void mousePressed(MouseEvent e) {
      					dispose(); // 홈으로 돌아감 
 
+
+
      			}
      		});
      	

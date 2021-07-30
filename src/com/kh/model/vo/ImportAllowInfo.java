@@ -7,8 +7,8 @@ public class ImportAllowInfo extends Info implements Serializable {
 
 
 
-    public ImportAllowInfo(String item, String sort, String quantity, String price, String user, String phoneNum, String departure, String arrival) {
-        super(item, sort, quantity, price, user, phoneNum, departure, arrival);
+    public ImportAllowInfo(String taskNum,String item, String sort, String quantity, String price, String user, String phoneNum, String departure, String arrival) {
+        super(taskNum ,item, sort, quantity, price, user, phoneNum, departure, arrival);
 
 
     }

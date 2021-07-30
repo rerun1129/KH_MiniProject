@@ -1,5 +1,7 @@
 package com.kh.controller;
 
+import com.kh.model.vo.ExportAccuseInfo;
+import com.kh.model.vo.ImportAccuseInfo;
 import com.kh.view.User;
 
 import java.awt.Color;
@@ -7,6 +9,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -15,10 +19,12 @@ public class ImportUser extends JFrame {
     //Todo 2. 신고처리를 누르면 Admin DB로 넘어감
 
 
-
-    private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival, imLimit, imNot;
-    private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
+    private JLabel taskNum, name, sort, quantity, price, user, phoneNum, departure, arrival, imLimit, imNot;
+    private JTextField taskNumT, nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accuse, cancel;
+
+    private String[] lines = new String[100];
+    private String[] lineArr;
 
 
     public ImportUser() {
@@ -34,7 +40,7 @@ public class ImportUser extends JFrame {
         Font f = new Font("맑은 고딕", Font.BOLD, 20);
         Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
-
+        taskNum = new JLabel("•신고 번호 : ");
         name = new JLabel("•물품명 : ");
         sort = new JLabel("•종류 : ");
         quantity = new JLabel("•수량 : ");
@@ -45,7 +51,7 @@ public class ImportUser extends JFrame {
         arrival = new JLabel("•도착지 : ");
 
 
-
+        taskNumT = new JTextField(20);
         nameT = new JTextField(20);
         sortT = new JTextField(20);
         quantityT = new JTextField(20);
@@ -59,7 +65,7 @@ public class ImportUser extends JFrame {
         accuse = new JButton("신고");
         cancel = new JButton("취소");
 
-
+        taskNum.setBounds(20, 80, 400, 25);
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
         quantity.setBounds(20, 200, 400, 25);
@@ -70,7 +76,7 @@ public class ImportUser extends JFrame {
         arrival.setBounds(20, 400, 400, 25);
 
 
-
+        taskNumT.setBounds(200, 80, 700, 25);
         nameT.setBounds(200, 120, 700, 25);
         sortT.setBounds(200, 160, 700, 25);
         quantityT.setBounds(200, 200, 700, 25);
@@ -96,6 +102,7 @@ public class ImportUser extends JFrame {
         arrival.setFont(f);
         accuse.setFont(g);
         cancel.setFont(g);
+        taskNum.setFont(f);
 
         name.setForeground(Color.white);
         sort.setForeground(Color.white);
@@ -105,8 +112,8 @@ public class ImportUser extends JFrame {
         phoneNum.setForeground(Color.white);
         departure.setForeground(Color.white);
         arrival.setForeground(Color.white);
-
-
+        taskNum.setForeground(Color.white);
+        taskNumT.setEditable(false);
 
         add(name);
         add(sort);
@@ -124,11 +131,14 @@ public class ImportUser extends JFrame {
         add(phoneNumT);
         add(departureT);
         add(arrivalT);
-
+        add(taskNum);
+        add(taskNumT);
 
         add(accuse);
         add(cancel);
         add(panel);
+
+        autoIncrement();
 
         label.setIcon(new ImageIcon(img));
 
@@ -140,15 +150,32 @@ public class ImportUser extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-
         accuse.addActionListener(e -> {
 
 
-            JOptionPane.showMessageDialog(null,"수입신고가 완료되었습니다.");
+            JOptionPane.showMessageDialog(null, "수입신고가 완료되었습니다.");
 
-            //todo 이제 이걸 파일로 쏴서 객체화 시키고 어드민에서 바로 불러오도록한다.
-            //todo 그리고 유저화면에 신고 결과 확인을 넣어서 이름, 전화번호로 확인이 가능하도록 처리한다.
-            
+            File file = new File("importInfo.dat");
+
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
+
+                bw.write(taskNumT.getText()+"/");
+                bw.write(nameT.getText()+"/");
+                bw.write(sortT.getText()+"/");
+                bw.write(quantityT.getText()+"/");
+                bw.write(priceT.getText()+"/");
+                bw.write(userT.getText()+"/");
+                bw.write(phoneNumT.getText()+"/");
+                bw.write(departureT.getText()+"/");
+                bw.write(arrivalT.getText());
+                bw.write("\r\n");
+                bw.flush();
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
             dispose();
 
             new User();
@@ -157,6 +184,7 @@ public class ImportUser extends JFrame {
 
         cancel.addActionListener(e -> {
 
+
             dispose();
 
             new User();
@@ -164,6 +192,29 @@ public class ImportUser extends JFrame {
 
         });
 
+
+    }
+    public void autoIncrement() {
+
+        File file = new File("importInfo.dat");
+        int i = 0;
+        String line;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+            lineArr = lines[i-1].split("/");
+            int temp = Integer.parseInt(lineArr[0])+1;
+            String fin = String.valueOf(temp);
+            taskNumT.setText(fin);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
