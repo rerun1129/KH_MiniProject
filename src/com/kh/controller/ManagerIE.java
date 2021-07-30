@@ -35,7 +35,7 @@ public class ManagerIE extends JFrame implements ActionListener {
 
     private JLabel exLimit, imLimit, exNot, imNot;
     private JTextField exLimitT, imLimitT, exNotT, imNotT;
-    private JButton addBtn1, addBtn2, addBtn3, addBtn4;
+    private JButton addBtn1, addBtn2, addBtn3, addBtn4, delBtn1, delBtn2, delBtn3, delBtn4;
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
 
     private JButton quitButton = new JButton(quitImage);
@@ -68,9 +68,6 @@ public class ManagerIE extends JFrame implements ActionListener {
         imNotT = new JTextField(20);
 
 
-
-
-
         addBtn1 = new JButton("추가");
         addBtn1.addActionListener(e -> {
 
@@ -92,13 +89,39 @@ public class ManagerIE extends JFrame implements ActionListener {
         });
 
 
-
         addBtn4 = new JButton("추가");
         addBtn4.addActionListener(e -> {
 
             ll.II(imNotT.getText());
         });
 
+
+        delBtn1 = new JButton("삭제");
+        delBtn1.addActionListener(e -> {
+            ll.ELD(exLimitT.getText());
+        });
+
+
+        delBtn2 = new JButton("삭제");
+        delBtn2.addActionListener(e -> {
+
+            ll.ILD(imLimitT.getText());
+        });
+
+
+        delBtn3 = new JButton("삭제");
+        delBtn3.addActionListener(e -> {
+            ll.EID(exNotT.getText());
+
+        });
+
+
+        delBtn4 = new JButton("삭제");
+        delBtn4.addActionListener(e -> {
+
+            ll.IID(imNotT.getText());
+
+        });
 
 
         quitButton.addMouseListener(new MouseAdapter() {
@@ -125,19 +148,20 @@ public class ManagerIE extends JFrame implements ActionListener {
         imNot.setBounds(20, 340, 400, 25);
 
 
-
         exLimitT.setBounds(250, 160, 550, 25);
         imLimitT.setBounds(250, 220, 550, 25);
         exNotT.setBounds(250, 280, 550, 25);
         imNotT.setBounds(250, 340, 550, 25);
 
 
-        addBtn1.setBounds(830, 160, 100, 25);
-        addBtn2.setBounds(830, 220, 100, 25);
-        addBtn3.setBounds(830, 280, 100, 25);
-        addBtn4.setBounds(830, 340, 100, 25);
-
-
+        addBtn1.setBounds(830, 145, 100, 25);
+        addBtn2.setBounds(830, 205, 100, 25);
+        addBtn3.setBounds(830, 265, 100, 25);
+        addBtn4.setBounds(830, 325, 100, 25);
+        delBtn1.setBounds(830, 175, 100, 25);
+        delBtn2.setBounds(830, 235, 100, 25);
+        delBtn3.setBounds(830, 295, 100, 25);
+        delBtn4.setBounds(830, 355, 100, 25);
 
         JPanel panel = new JPanel();
         panel.add(label);
@@ -146,6 +170,14 @@ public class ManagerIE extends JFrame implements ActionListener {
         imLimit.setFont(f);
         exNot.setFont(f);
         imNot.setFont(f);
+        addBtn1.setFont(g);
+        addBtn2.setFont(g);
+        addBtn3.setFont(g);
+        addBtn4.setFont(g);
+        delBtn1.setFont(g);
+        delBtn2.setFont(g);
+        delBtn3.setFont(g);
+        delBtn4.setFont(g);
 
         exLimit.setForeground(Color.white);
         imLimit.setForeground(Color.white);
@@ -167,6 +199,10 @@ public class ManagerIE extends JFrame implements ActionListener {
         add(addBtn2);
         add(addBtn3);
         add(addBtn4);
+        add(delBtn1);
+        add(delBtn2);
+        add(delBtn3);
+        add(delBtn4);
 
         add(quitButton);
         quitButton.setBounds(400, 430, 150, 75);
@@ -185,8 +221,6 @@ public class ManagerIE extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
 
 
     }

@@ -1,7 +1,5 @@
 package com.kh.controller;
 
-import com.kh.view.Admin;
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -17,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class InfoSearch extends JFrame {
     //	private JLabel sort, user, departure, arrival;
@@ -51,7 +50,7 @@ public class InfoSearch extends JFrame {
         departBtn = new JButton("출발지 조회");
         arrivalBtn = new JButton("도착지 조회");
 
-        ImageIcon myImg = new ImageIcon("Images/quit.png");
+        ImageIcon myImg = new ImageIcon("images/quit.png");
         finish = new JButton(myImg);
         finish.setBorderPainted(false);
         finish.setContentAreaFilled(false);
@@ -106,8 +105,6 @@ public class InfoSearch extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감
-
-                new Admin();
             }
         });
 
@@ -122,7 +119,7 @@ public class InfoSearch extends JFrame {
         arrivalT.setBounds(250, 340, 550, 25);
 
         sortBtn.setBounds(830, 160, 100, 25);
-        userBtn.setBounds(830, 220, 100, 25);
+        userBtn.setBounds(830, 220, 200, 25);
         departBtn.setBounds(830, 280, 100, 25);
         arrivalBtn.setBounds(830, 340, 100, 25);
         finish.setBounds(400, 430, 150, 75);
@@ -134,8 +131,11 @@ public class InfoSearch extends JFrame {
 
         sortBtn.setFont(g);
         userBtn.setFont(g);
+        userBtn.setHorizontalAlignment(SwingConstants.LEFT);
         departBtn.setFont(g);
+        departBtn.setHorizontalAlignment(SwingConstants.LEFT);
         arrivalBtn.setFont(g);
+        arrivalBtn.setHorizontalAlignment(SwingConstants.LEFT);
 
         sort.setForeground(Color.white);
         user.setForeground(Color.white);

@@ -2,6 +2,7 @@ package com.kh.controller;
 
 
 import com.kh.model.dao.FileIO;
+import com.kh.model.vo.ExportAllowInfo;
 import com.kh.model.vo.ImportAllowInfo;
 import com.kh.model.vo.Info;
 import com.kh.view.Admin;
@@ -31,7 +32,7 @@ public class ExportAdmin extends JFrame {
     private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accept, cancel;
 
-    ArrayList<ImportAllowInfo> infoArray = new ArrayList<>();
+    ArrayList<ExportAllowInfo> infoArray = new ArrayList<>();
 
     FileIO fio = new FileIO();
 
