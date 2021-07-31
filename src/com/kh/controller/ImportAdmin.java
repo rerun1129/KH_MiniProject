@@ -17,9 +17,14 @@ public class ImportAdmin extends JFrame {
     private JButton accept, cancel;
 
     private String[] lines = new String[100];
-    private String[] lineArr;
-    int number;
+    private String[] linesC = new String[100];
 
+    private String[] lineArr;
+    private String[] lineArrC;
+
+
+    private int number;
+    private String strWhy;
 
     public ImportAdmin() {
 
@@ -54,8 +59,6 @@ public class ImportAdmin extends JFrame {
         phoneNumT = new JTextField(20);
         departureT = new JTextField(20);
         arrivalT = new JTextField(20);
-
-        cancel = new JButton();
 
 
         accept = new JButton("신고처리");
@@ -230,6 +233,33 @@ public class ImportAdmin extends JFrame {
 
             JOptionPane.showMessageDialog(null, "불허 처리했습니다.");
 
+            strWhy = JOptionPane.showInputDialog(null, " 불허사유를 적어주세요.", "신고 불허", JOptionPane.QUESTION_MESSAGE);
+
+            File file = new File("src/com/kh/dat/importConfirm.dat");
+            File file1 = new File("src/com/kh/dat/importInfo.dat");
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+                 BufferedReader br = new BufferedReader(new FileReader(file1))) {
+
+                String str;
+                int j = 0;
+                int[] spInt = new int[100];
+                while ((str = br.readLine()) != null) {
+                    String[] split = str.split("/");
+                    spInt[j] = Integer.parseInt(split[0]);
+                    if (spInt[j] == number) {
+                        bw.write(str+"/(불허사유) "+strWhy);
+                        break;
+                    }
+                }
+                bw.write("\r\n");
+                bw.flush();
+
+            } catch (FileNotFoundException exception) {
+                JOptionPane.showMessageDialog(null, "파일이 없습니다.");
+            } catch (IOException exception) {
+                JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
+            }
 
             dispose();
 
@@ -242,14 +272,15 @@ public class ImportAdmin extends JFrame {
 
         File file = new File("src/com/kh/dat/importInfo.dat");
         int i = 0;
-        String line;
+        String line1;
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            while ((line = br.readLine()) != null) {
-                lines[i] = line;
+            while ((line1 = br.readLine()) != null) {
+                lines[i] = line1;
 
                 i++;
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -272,15 +303,8 @@ public class ImportAdmin extends JFrame {
 
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
-            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(프로그램 종료)", "확인", JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.CLOSED_OPTION) {
-                System.exit(0);
-
-            } else if (result == JOptionPane.YES_OPTION) {
-                new ExportAdmin();
-            } else {
-                System.exit(0);
-            }
+            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
+            System.exit(0);
         }
     }
 }
