@@ -11,14 +11,11 @@ import java.io.*;
 public class ExportAdmin extends JFrame {
 
 
-    private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival;
-    private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
+    private JLabel taskNum, name, sort, quantity, price, user, phoneNum, departure, arrival;
+    private JTextField taskNumT, nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
     private JButton accept, cancel;
-
-
     private String[] lines = new String[100];
     private String[] lineArr;
-    private int number;
     private String strWhy;
 
     public ExportAdmin() {
@@ -36,7 +33,7 @@ public class ExportAdmin extends JFrame {
         Font f = new Font("맑은 고딕", Font.BOLD, 20);
         Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
-
+        taskNum = new JLabel("•신고 번호 : ");
         name = new JLabel("•물품명 : ");
         sort = new JLabel("•종류 : ");
         quantity = new JLabel("•수량 : ");
@@ -46,7 +43,7 @@ public class ExportAdmin extends JFrame {
         departure = new JLabel("•출발지 : ");
         arrival = new JLabel("•도착지 : ");
 
-
+        taskNumT = new JTextField(20);
         nameT = new JTextField(20);
         sortT = new JTextField(20);
         quantityT = new JTextField(20);
@@ -60,7 +57,7 @@ public class ExportAdmin extends JFrame {
         accept = new JButton("신고처리");
         cancel = new JButton("불허");
 
-
+        taskNum.setBounds(20, 80, 400, 25);
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
         quantity.setBounds(20, 200, 400, 25);
@@ -70,7 +67,7 @@ public class ExportAdmin extends JFrame {
         departure.setBounds(20, 360, 400, 25);
         arrival.setBounds(20, 400, 400, 25);
 
-
+        taskNumT.setBounds(200, 80, 700, 25);
         nameT.setBounds(200, 120, 700, 25);
         sortT.setBounds(200, 160, 700, 25);
         quantityT.setBounds(200, 200, 700, 25);
@@ -96,9 +93,13 @@ public class ExportAdmin extends JFrame {
         phoneNum.setFont(f);
         departure.setFont(f);
         arrival.setFont(f);
+        taskNum.setFont(f);
+
+
         accept.setFont(g);
         cancel.setFont(g);
 
+        taskNumT.setEditable(false);
 
         name.setForeground(Color.white);
         sort.setForeground(Color.white);
@@ -108,6 +109,9 @@ public class ExportAdmin extends JFrame {
         phoneNum.setForeground(Color.white);
         departure.setForeground(Color.white);
         arrival.setForeground(Color.white);
+        taskNum.setForeground(Color.white);
+
+
 
         nameT.setEditable(false);
         sortT.setEditable(false);
@@ -119,7 +123,6 @@ public class ExportAdmin extends JFrame {
         arrivalT.setEditable(false);
 
 
-        fileIn();
         add(name);
         add(sort);
         add(quantity);
@@ -136,6 +139,8 @@ public class ExportAdmin extends JFrame {
         add(phoneNumT);
         add(departureT);
         add(arrivalT);
+        add(taskNum);
+        add(taskNumT);
 
 
         add(accept);
@@ -189,12 +194,9 @@ public class ExportAdmin extends JFrame {
                      BufferedReader br = new BufferedReader(new FileReader(file1))) {
 
                     String str;
-                    int j = 0;
-                    int[] spInt = new int[100];
                     while ((str = br.readLine()) != null) {
                         String[] split = str.split("/");
-                        spInt[j] = Integer.parseInt(split[0]);
-                        if (spInt[j] == number) {
+                        if (split[0].equals(taskNumT.getText())) {
                             bw.write(str);
                             break;
                         }
@@ -242,12 +244,9 @@ public class ExportAdmin extends JFrame {
                  BufferedReader br = new BufferedReader(new FileReader(file1))) {
 
                 String str;
-                int j = 0;
-                int[] spInt = new int[100];
                 while ((str = br.readLine()) != null) {
                     String[] split = str.split("/");
-                    spInt[j] = Integer.parseInt(split[0]);
-                    if (spInt[j] == number) {
+                    if (split[0].equals(taskNumT.getText())) {
                         bw.write(str + "/(불허사유)" + strWhy);
                         break;
                     }
@@ -268,6 +267,7 @@ public class ExportAdmin extends JFrame {
         });
 
         fileIn();
+
     }
 
 
@@ -275,53 +275,51 @@ public class ExportAdmin extends JFrame {
 
 
         File file = new File("src/com/kh/dat/exportInfo.dat");
-
+        File file1 = new File("src/com/kh/dat/exportConfirm.dat");
 
         int i = 0;
         String line;
+        String [] lineArrC;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br1 = new BufferedReader(new FileReader(file1))) {
+
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
-
                 i++;
             }
+            lineArr = lines[i-1].split("/");
+            while ((line = br1.readLine())!=null){
+                lines[i] = line;
+                i++;
+            }
+            lineArrC = lines[i-1].split("/");
+
+
+            if(lineArr[0].equals(lineArrC[0])){
+                JOptionPane.showMessageDialog(null, "처리할 업무가 없습니다.");
+                dispose();
+                new Admin();
+            }else{
+
+                int temp = Integer.parseInt(lineArr[0]);
+                String fin = String.valueOf(temp);
+                taskNumT.setText(fin);
+                nameT.setText(lineArr[1]);
+                sortT.setText(lineArr[2]);
+                quantityT.setText(lineArr[3]);
+                priceT.setText(lineArr[4]);
+                userT.setText(lineArr[5]);
+                phoneNumT.setText(lineArr[6]);
+                departureT.setText(lineArr[7]);
+                arrivalT.setText(lineArr[8]);
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try {
-            number = Integer.parseInt(JOptionPane.showInputDialog("처리할 신고 번호를 입력하세요."));
-
-            lineArr = lines[number - 1].split("/");
-            nameT.setText(lineArr[1]);
-            sortT.setText(lineArr[2]);
-            quantityT.setText(lineArr[3]);
-            priceT.setText(lineArr[4]);
-            userT.setText(lineArr[5]);
-            phoneNumT.setText(lineArr[6]);
-            departureT.setText(lineArr[7]);
-            arrivalT.setText(lineArr[8]);
-
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
-
-
-            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(초기화면)", "확인", JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.CLOSED_OPTION) {
-                dispose();
-                new Admin();
-
-            } else if (result == JOptionPane.YES_OPTION) {
-
-                dispose();
-                new ExportAdmin();
-
-            } else {
-                dispose();
-                new Admin();
-            }
-        }
     }
 }
