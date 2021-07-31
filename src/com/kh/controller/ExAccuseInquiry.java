@@ -9,14 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.io.*;
+import javax.swing.*;
 
 import com.kh.view.Admin;
+import com.kh.view.User;
 
 
 public class ExAccuseInquiry extends JFrame implements ActionListener {
@@ -64,8 +61,22 @@ public class ExAccuseInquiry extends JFrame implements ActionListener {
 
 
         inquiryButton.addMouseListener(new MouseAdapter() {
-        	
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                inquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                result();
+            }
         });
+
+
+
+
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -78,7 +89,7 @@ public class ExAccuseInquiry extends JFrame implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 dispose();
 
-                new Admin();
+                new User();
             }
 
         });
@@ -152,4 +163,50 @@ public class ExAccuseInquiry extends JFrame implements ActionListener {
 
     }
 
+
+
+    public void result() {
+
+        File file = new File("src/com/kh/dat/exportConfirm.dat");
+
+        String str;
+        String[] tokens;
+        int i = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((str = br.readLine()) != null) {
+                tokens = str.split("/");
+                if (tokens[5].equals(nameT.getText()) && tokens[6].equals(phoneNumT.getText())) {
+                    UIManager.put("OptionPane.messageFont",new Font("맑은 고딕",Font.BOLD,15));
+                    UIManager.put("OptionPane.buttonFont",new Font("맑은 고딕",Font.BOLD,12));
+                    JOptionPane.showMessageDialog(null, toString(tokens), "수출신고 허가여부", JOptionPane.PLAIN_MESSAGE);
+                    nameT.setText("");
+                    phoneNumT.setText("");
+                    i = 1;
+                    break;
+                }
+            }
+            if(i==0){
+                JOptionPane.showMessageDialog(null,"정확하게 입력해주세요.");
+                nameT.setText("");
+                phoneNumT.setText("");
+            }
+        } catch (FileNotFoundException exception) {
+            JOptionPane.showMessageDialog(null, "파일이 없습니다.");
+        } catch (IOException exception) {
+            JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
+        }
+    }
+    public String toString(String [] token){
+
+        return  "신고 번호 : " + token[0]+ "\r\n"+
+                "물품명 : " + token[1] + "\r\n" +
+                "종류 : " + token[2] + "\r\n"  +
+                "수량 : " + token[3] + "EA \r\n"  +
+                "단가 : " + token[4] + "원 \r\n"  +
+                "신고인 : " + token[5] + " 님\r\n"  +
+                "연락처 : " + token[6] + "\r\n"  +
+                "출발지 : " + token[7] + "\r\n"  +
+                "도착지 : " + token[8] + "\r\n"+
+                "세관 결정 : " + token[9];
+    }
 }

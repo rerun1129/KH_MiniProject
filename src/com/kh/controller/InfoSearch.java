@@ -8,13 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.kh.view.Admin;
 
@@ -55,46 +51,37 @@ public class InfoSearch extends JFrame {
         finish.setContentAreaFilled(false);
         finish.setFocusPainted(false);
 
-        sortBtn.addActionListener(new ActionListener() {
+        sortBtn.addActionListener(e -> {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 저장된 데이터를 불러와서 대조
-
-            }
 
         });
 
-        userBtn.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-        // 출발지 조회
-        departBtn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        userBtn.addActionListener(e -> {
 
 
-            }
 
-        });
-        // 도착지 조회
-        arrivalBtn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
 
         });
 
-        // 나가기 버튼
+
+        departBtn.addActionListener(e -> {
+
+
+
+
+        });
+
+
+        arrivalBtn.addActionListener(e -> {
+
+
+
+
+        });
+
+
+
         finish.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -103,7 +90,7 @@ public class InfoSearch extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                dispose(); // 홈으로 돌아감
+                dispose();
                 new Admin();
             }
         });
@@ -168,5 +155,7 @@ public class InfoSearch extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
+
+
 
 }

@@ -10,14 +10,6 @@ import java.io.*;
 public class ExportAdmin extends JFrame {
 
 
-    //Todo 1. 신고처리를 누르면 정보가 다시 Admin DB로 가서 유저가 버튼을 눌러서 확인 가능하게
-    //Todo 2. 유저 DB에서 정보를 받고 그걸 자동으로 입력란에 쓴다.
-    //Todo 이제 수입제한이거나 수입금지면 유저에게 알림이 간다. 유저 화면에서 버튼 하나
-    //Todo 추가해서 거기서 확인하는 식으로.
-    //todo 그리고 직접 적지말고 파일에서 순차적으로 자동입력받게하고
-    //todo 취소대신에 나가기버튼이랑 불허 버튼을 나눠서 허가, 불허는 다음 객체 불러오기
-    //todo 나가기는 홈화면
-
 
     private JLabel name, sort, quantity, price, user, phoneNum, departure, arrival;
     private JTextField nameT, sortT, quantityT, priceT, userT, phoneNumT, departureT, arrivalT;
@@ -234,7 +226,7 @@ public class ExportAdmin extends JFrame {
 
         cancel.addActionListener(e -> {
 
-            JOptionPane.showMessageDialog(null, "취소했습니다.");
+            JOptionPane.showMessageDialog(null, "불허 처리했습니다.");
 
             dispose();
 
@@ -277,9 +269,15 @@ public class ExportAdmin extends JFrame {
                 arrivalT.setText(lineArr[8]);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
-            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
-            System.exit(0);
+            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(프로그램 종료)", "확인", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.CLOSED_OPTION) {
+                System.exit(0);
 
+            } else if (result == JOptionPane.YES_OPTION) {
+                new ExportAdmin();
+            } else {
+                System.exit(0);
+            }
         }
     }
 }

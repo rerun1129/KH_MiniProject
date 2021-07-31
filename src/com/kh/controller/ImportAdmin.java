@@ -172,7 +172,7 @@ public class ImportAdmin extends JFrame {
                             break;
                         }
                     }
-                    if(i==0){
+                    if (i == 0) {
                         JOptionPane.showMessageDialog(null, "수입신고를 허가합니다.");
                     }
                 } catch (IOException fileNotFoundException) {
@@ -189,14 +189,14 @@ public class ImportAdmin extends JFrame {
                     String str;
                     int j = 0;
                     int[] spInt = new int[100];
-                          while ((str = br.readLine()) != null){
-                              String[] split = str.split("/");
-                              spInt[j] = Integer.parseInt(split[0]);
-                              if (spInt[j] == number){
-                                  bw.write(str);
-                                  break;
-                              }
-                          }
+                    while ((str = br.readLine()) != null) {
+                        String[] split = str.split("/");
+                        spInt[j] = Integer.parseInt(split[0]);
+                        if (spInt[j] == number) {
+                            bw.write(str);
+                            break;
+                        }
+                    }
 
                     switch (i) {
                         case 1:
@@ -228,7 +228,7 @@ public class ImportAdmin extends JFrame {
 
         cancel.addActionListener(e -> {
 
-            JOptionPane.showMessageDialog(null, "취소했습니다.");
+            JOptionPane.showMessageDialog(null, "불허 처리했습니다.");
 
 
             dispose();
@@ -270,12 +270,18 @@ public class ImportAdmin extends JFrame {
             departureT.setText(lineArr[7]);
             arrivalT.setText(lineArr[8]);
 
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
-            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
-            System.exit(0);
 
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
+            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(프로그램 종료)", "확인", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.CLOSED_OPTION) {
+                System.exit(0);
+
+            } else if (result == JOptionPane.YES_OPTION) {
+                new ExportAdmin();
+            } else {
+                System.exit(0);
+            }
         }
     }
-
 }
 

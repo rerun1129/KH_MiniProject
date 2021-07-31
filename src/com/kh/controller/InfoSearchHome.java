@@ -49,7 +49,7 @@ public class InfoSearchHome extends JFrame {
         exInfoBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                exInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
@@ -64,7 +64,7 @@ public class InfoSearchHome extends JFrame {
         inInfoBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                inInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             @Override
@@ -112,10 +112,6 @@ public class InfoSearchHome extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-//		Font f = new Font("맑은 고딕", Font.BOLD, 25);
-//		Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
 
     }
