@@ -12,7 +12,6 @@ import javax.swing.*;
 
 public class ImportUser extends JFrame {
 
-    //Todo 2. 신고처리를 누르면 Admin DB로 넘어감
 
 
     private JLabel taskNum, name, sort, quantity, price, user, phoneNum, departure, arrival, imLimit, imNot;

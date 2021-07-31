@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import javax.swing.*;
 
-import com.kh.view.Admin;
 import com.kh.view.User;
 
 
@@ -55,11 +54,6 @@ public class ExAccuseInquiry extends JFrame implements ActionListener {
         nameT = new JTextField(20);
         phoneNumT = new JTextField(20);
         
-
-
-
-
-
 
 
         inquiryButton.addMouseListener(new MouseAdapter() {
@@ -191,12 +185,11 @@ public class ExAccuseInquiry extends JFrame implements ActionListener {
                     UIManager.put("OptionPane.messageFont",new Font("맑은 고딕",Font.BOLD,15));
                     UIManager.put("OptionPane.buttonFont",new Font("맑은 고딕",Font.BOLD,12));
                     JOptionPane.showMessageDialog(null, toString(tokens), "수출신고 허가여부", JOptionPane.PLAIN_MESSAGE);
-                    nameT.setText("");
-                    phoneNumT.setText("");
                     i = 1;
-                    break;
                 }
             }
+            nameT.setText("");
+            phoneNumT.setText("");
             if(i==0){
                 JOptionPane.showMessageDialog(null,"정확하게 입력해주세요.");
                 nameT.setText("");

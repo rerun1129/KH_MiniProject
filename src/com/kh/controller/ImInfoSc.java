@@ -5,19 +5,17 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 
 import javax.swing.*;
 
-import com.kh.view.Admin;
 
 public class ImInfoSc extends JFrame {
-    private JLabel taskNum, sort, user, depart, arrival;
-    private JTextField taskNumT, sortT, userT, departT, arrivalT;
-    private JButton taskNumBtn, sortBtn, userBtn, departBtn, arrivalBtn, finish;
+    private final JLabel taskNum, sort, user, depart, arrival;
+    private final JTextField taskNumT, sortT, userT, departT, arrivalT;
+    private final JButton taskNumBtn, sortBtn, userBtn, departBtn, arrivalBtn, finish;
 
     public ImInfoSc() {
 
@@ -58,32 +56,16 @@ public class ImInfoSc extends JFrame {
         finish.setFocusPainted(false);
 
 
-
-        taskNumBtn.addActionListener(e -> {
-
-            imResult(e);
-
-        });
+        taskNumBtn.addActionListener(this::imResult);
 
         // 종류 조회
-        sortBtn.addActionListener(e -> {
-            imResult(e);
+        sortBtn.addActionListener(this::imResult);
 
-        });
-
-        userBtn.addActionListener(e -> {
-            imResult(e);
-        });
+        userBtn.addActionListener(this::imResult);
         // 출발지 조회
-        departBtn.addActionListener(e -> {
-            imResult(e);
-
-        });
+        departBtn.addActionListener(this::imResult);
         // 도착지 조회
-        arrivalBtn.addActionListener(e -> {
-            imResult(e);
-        });
-
+        arrivalBtn.addActionListener(this::imResult);
 
 
         // 나가기 버튼
@@ -100,6 +82,7 @@ public class ImInfoSc extends JFrame {
 
 
             }
+
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감
@@ -108,12 +91,11 @@ public class ImInfoSc extends JFrame {
         });
 
 
-
         sort.setBounds(20, 130, 400, 25);
         user.setBounds(20, 190, 400, 25);
         depart.setBounds(20, 250, 400, 25);
         arrival.setBounds(20, 310, 400, 25);
-        taskNum.setBounds(20,370,400,25);
+        taskNum.setBounds(20, 370, 400, 25);
 
         sortT.setBounds(250, 130, 500, 25);
         userT.setBounds(250, 190, 500, 25);
@@ -196,7 +178,7 @@ public class ImInfoSc extends JFrame {
                     if (tokens[0].equals(taskNumT.getText())) {
                         UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.BOLD, 15));
                         UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.BOLD, 12));
-                        JOptionPane.showMessageDialog(null, toString(tokens), "종류대상조회", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, toString(tokens), "번호대상조회", JOptionPane.PLAIN_MESSAGE);
                         i = 1;
                     }
                 }
@@ -207,7 +189,6 @@ public class ImInfoSc extends JFrame {
                 }
                 taskNumT.setText("");
             }
-
 
 
             if (sortBtn.equals(e.getSource())) {
@@ -234,7 +215,7 @@ public class ImInfoSc extends JFrame {
                     if (tokens[5].equals(userT.getText())) {
                         UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.BOLD, 15));
                         UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.BOLD, 12));
-                        JOptionPane.showMessageDialog(null, toString(tokens), "종류대상조회", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, toString(tokens), "신고인대상조회", JOptionPane.PLAIN_MESSAGE);
                         i = 1;
                     }
                 }
@@ -250,7 +231,7 @@ public class ImInfoSc extends JFrame {
                     if (tokens[7].equals(departT.getText())) {
                         UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.BOLD, 15));
                         UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.BOLD, 12));
-                        JOptionPane.showMessageDialog(null, toString(tokens), "종류대상조회", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, toString(tokens), "출발지대상조회", JOptionPane.PLAIN_MESSAGE);
                         i = 1;
                     }
                 }
@@ -268,7 +249,7 @@ public class ImInfoSc extends JFrame {
                     if (tokens[8].equals(arrivalT.getText())) {
                         UIManager.put("OptionPane.messageFont", new Font("맑은 고딕", Font.BOLD, 15));
                         UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕", Font.BOLD, 12));
-                        JOptionPane.showMessageDialog(null, toString(tokens), "종류대상조회", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, toString(tokens), "도착지대상조회", JOptionPane.PLAIN_MESSAGE);
                         i = 1;
                     }
                 }

@@ -3,7 +3,6 @@ package com.kh.controller;
 import com.kh.view.User;
 
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,21 +11,21 @@ import javax.swing.*;
 public class Inquiry extends JFrame {
 
 
-    private ImageIcon quitButtonImage = new ImageIcon("images/quit.png");
-    private ImageIcon exAccuseImage = new ImageIcon("images/수출신고조회.png");
-    private ImageIcon imAccuseImage = new ImageIcon("images/수입신고조회.png");
-    private ImageIcon quitButtonImage2 = new ImageIcon("images/quit2.png");
-    private ImageIcon exAccuseImage2 = new ImageIcon("images/수출신고조회2.png");
-    private ImageIcon imAccuseImage2 = new ImageIcon("images/수입신고조회2.png");
+    private final ImageIcon quitButtonImage = new ImageIcon("images/quit.png");
+    private final ImageIcon exAccuseImage = new ImageIcon("images/수출신고조회.png");
+    private final ImageIcon imAccuseImage = new ImageIcon("images/수입신고조회.png");
+    private final ImageIcon quitButtonImage2 = new ImageIcon("images/quit2.png");
+    private final ImageIcon exAccuseImage2 = new ImageIcon("images/수출신고조회2.png");
+    private final ImageIcon imAccuseImage2 = new ImageIcon("images/수입신고조회2.png");
 
 
-    private JButton quitButton = new JButton(quitButtonImage);
-    private JButton exAccuse = new JButton(exAccuseImage);
-    private JButton imAccuse = new JButton(imAccuseImage);
+    private final JButton quitButton = new JButton(quitButtonImage);
+    private final JButton exAccuse = new JButton(exAccuseImage);
+    private final JButton imAccuse = new JButton(imAccuseImage);
 
 
     public Inquiry() {
-        JPanel pan = new JPanel();
+
         setTitle("신고 조회");
         JLayeredPane lp = new JLayeredPane();
         lp.setSize(960, 540);
@@ -39,8 +38,6 @@ public class Inquiry extends JFrame {
         JLabel label = new JLabel();
 
 
-        Font f = new Font("맑은 고딕", Font.BOLD, 20);
-        Font g = new Font("맑은 고딕", Font.BOLD, 15);
 
 
         // 수출신고조회 버튼

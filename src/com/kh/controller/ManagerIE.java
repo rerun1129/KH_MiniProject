@@ -16,13 +16,13 @@ import com.kh.view.Admin;
 public class ManagerIE extends JFrame implements ActionListener {
 
 
-    private JLabel exLimit, imLimit, exNot, imNot;
-    private JTextField exLimitT, imLimitT, exNotT, imNotT;
-    private JButton addBtn1, addBtn2, addBtn3, addBtn4, delBtn1, delBtn2, delBtn3, delBtn4;
-    private ImageIcon quitImage = new ImageIcon("images/quit.png");
-    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private final JLabel exLimit, imLimit, exNot, imNot;
+    private final JTextField exLimitT, imLimitT, exNotT, imNotT;
+    private final JButton addBtn1, addBtn2, addBtn3, addBtn4, delBtn1, delBtn2, delBtn3, delBtn4;
+    private final ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private final ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
 
-    private JButton quitButton = new JButton(quitImage);
+    private final JButton quitButton = new JButton(quitImage);
 
 
     LimitList ll = new LimitList();

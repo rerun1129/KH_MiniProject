@@ -85,6 +85,7 @@ public class InfoSearchHome extends JFrame {
 
 
             }
+
             @Override
             public void mousePressed(MouseEvent e) {
 
@@ -110,6 +111,7 @@ public class InfoSearchHome extends JFrame {
 
 
             }
+
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감

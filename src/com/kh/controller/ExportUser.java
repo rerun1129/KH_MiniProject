@@ -2,15 +2,12 @@ package com.kh.controller;
 
 
 import com.kh.view.User;
+
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
 public class ExportUser extends JFrame {
-
-    //Todo 1. 수입신고에서 바로 수입허가로 내용이 넘어오게해서 수정사항이 있으면 직접 고칠수 있도록
-    //Todo 2. 신고처리를 누르면 Admin DB로 넘어가고 넘어가기 전에 입력 내용들을 표시하고 맞는지 다시확인
-    //Todo 3. 확인 누르면 창이 꺼지면서 다시 어드민 홈 화면으로 가기 / 취소누르면 다시 허가화면으로 가기
 
 
     private JLabel taskNum, name, sort, quantity, price, user, phoneNum, departure, arrival;
@@ -150,10 +147,10 @@ public class ExportUser extends JFrame {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
 
 
-                if(nameT.getText().length() == 0 || sortT.getText().length() == 0 ||quantityT.getText().length() == 0 || priceT.getText().length() == 0|| userT.getText().length() == 0 ||phoneNumT.getText().length()==0||
-                        departureT.getText().length()==0||arrivalT.getText().length() == 0){
+                if (nameT.getText().length() == 0 || sortT.getText().length() == 0 || quantityT.getText().length() == 0 || priceT.getText().length() == 0 || userT.getText().length() == 0 || phoneNumT.getText().length() == 0 ||
+                        departureT.getText().length() == 0 || arrivalT.getText().length() == 0) {
                     JOptionPane.showMessageDialog(null, "각 항목이 공백이 없게 작성해주세요.");
-                }else{
+                } else {
                     bw.write(taskNumT.getText() + "/");
                     bw.write(nameT.getText() + "/");
                     bw.write(sortT.getText() + "/");
@@ -194,23 +191,24 @@ public class ExportUser extends JFrame {
         int i = 0;
         String line;
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
                 i++;
             }
 
-            lineArr = lines[i-1].split("/");
+            lineArr = lines[i - 1].split("/");
 
-            int temp = Integer.parseInt(lineArr[0])+1;
+            int temp = Integer.parseInt(lineArr[0]) + 1;
             String fin = String.valueOf(temp);
             taskNumT.setText(fin);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "파일이 없습니다.");
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "문제가 발생했습니다.");
 
+        }
     }
+
 }

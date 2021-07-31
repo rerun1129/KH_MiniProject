@@ -85,6 +85,7 @@ public class ExportAdmin extends JFrame {
         label.setIcon(new ImageIcon(img));
         panel.add(label);
 
+
         name.setFont(f);
         sort.setFont(f);
         quantity.setFont(f);
@@ -94,12 +95,9 @@ public class ExportAdmin extends JFrame {
         departure.setFont(f);
         arrival.setFont(f);
         taskNum.setFont(f);
-
-
         accept.setFont(g);
         cancel.setFont(g);
 
-        taskNumT.setEditable(false);
 
         name.setForeground(Color.white);
         sort.setForeground(Color.white);
@@ -112,7 +110,7 @@ public class ExportAdmin extends JFrame {
         taskNum.setForeground(Color.white);
 
 
-
+        taskNumT.setEditable(false);
         nameT.setEditable(false);
         sortT.setEditable(false);
         quantityT.setEditable(false);
@@ -158,77 +156,74 @@ public class ExportAdmin extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
-        accept.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int i = 0;
-                try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportLimit.dat"));
-                     BufferedReader br1 = new BufferedReader(new FileReader("src/com/kh/dat/exportInhibit.dat"))) {
-                    String str1;
-                    String str2;
+        accept.addActionListener(e -> {
+            int i = 0;
+            try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportLimit.dat"));
+                 BufferedReader br1 = new BufferedReader(new FileReader("src/com/kh/dat/exportInhibit.dat"))) {
+                String str1;
+                String str2;
 
-                    while ((str1 = br.readLine()) != null && (str2 = br1.readLine()) != null) {
-                        if (str1.equals(sortT.getText())) {
-                            JOptionPane.showMessageDialog(null, "수출제한 물품입니다.");
-                            i = 1;
-                            break;
-                        }
-                        if (str2.equals(sortT.getText())) {
-                            JOptionPane.showMessageDialog(null, "수출금지 물품입니다.");
-                            i = 2;
-                            break;
-                        }
+                while ((str1 = br.readLine()) != null && (str2 = br1.readLine()) != null) {
+                    if (str1.equals(sortT.getText())) {
+                        JOptionPane.showMessageDialog(null, "수출제한 물품입니다.");
+                        i = 1;
+                        break;
                     }
-                    if (i == 0) {
-                        JOptionPane.showMessageDialog(null, "수출신고를 허가합니다.");
+                    if (str2.equals(sortT.getText())) {
+                        JOptionPane.showMessageDialog(null, "수출금지 물품입니다.");
+                        i = 2;
+                        break;
                     }
-                } catch (IOException fileNotFoundException) {
-                    JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
                 }
-
-
-                File file = new File("src/com/kh/dat/exportConfirm.dat");
-                File file1 = new File("src/com/kh/dat/exportInfo.dat");
-
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-                     BufferedReader br = new BufferedReader(new FileReader(file1))) {
-
-                    String str;
-                    while ((str = br.readLine()) != null) {
-                        String[] split = str.split("/");
-                        if (split[0].equals(taskNumT.getText())) {
-                            bw.write(str);
-                            break;
-                        }
-                    }
-
-                    switch (i) {
-                        case 1:
-                            bw.write("/수출제한");
-                            break;
-                        case 2:
-                            bw.write("/수출금지");
-                            break;
-                        case 0:
-                            bw.write("/수출허가");
-                            break;
-                        default:
-
-                    }
-                    bw.write("\r\n");
-                    bw.flush();
-
-                } catch (FileNotFoundException exception) {
-                    JOptionPane.showMessageDialog(null, "파일이 없습니다.");
-                } catch (IOException exception) {
-                    JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null, "수출신고를 허가합니다.");
                 }
-
-                dispose();
-
-                new Admin();
-
+            } catch (IOException fileNotFoundException) {
+                JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
             }
+
+
+            File file = new File("src/com/kh/dat/exportConfirm.dat");
+            File file1 = new File("src/com/kh/dat/exportInfo.dat");
+
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+                 BufferedReader br = new BufferedReader(new FileReader(file1))) {
+
+                String str;
+                while ((str = br.readLine()) != null) {
+                    String[] split = str.split("/");
+                    if (split[0].equals(taskNumT.getText())) {
+                        bw.write(str);
+                        break;
+                    }
+                }
+
+                switch (i) {
+                    case 1:
+                        bw.write("/수출제한");
+                        break;
+                    case 2:
+                        bw.write("/수출금지");
+                        break;
+                    case 0:
+                        bw.write("/수출허가");
+                        break;
+                    default:
+
+                }
+                bw.write("\r\n");
+                bw.flush();
+
+            } catch (FileNotFoundException exception) {
+                JOptionPane.showMessageDialog(null, "파일이 없습니다.");
+            } catch (IOException exception) {
+                JOptionPane.showMessageDialog(null, "문제가 생겼습니다.");
+            }
+
+            dispose();
+
+            new Admin();
+
         });
 
         cancel.addActionListener(e -> {
@@ -279,28 +274,28 @@ public class ExportAdmin extends JFrame {
 
         int i = 0;
         String line;
-        String [] lineArrC;
+        String[] lineArrC;
 
-        try(BufferedReader br = new BufferedReader(new FileReader(file));
-            BufferedReader br1 = new BufferedReader(new FileReader(file1))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file));
+             BufferedReader br1 = new BufferedReader(new FileReader(file1))) {
 
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
                 i++;
             }
-            lineArr = lines[i-1].split("/");
-            while ((line = br1.readLine())!=null){
+            lineArr = lines[i - 1].split("/");
+            while ((line = br1.readLine()) != null) {
                 lines[i] = line;
                 i++;
             }
-            lineArrC = lines[i-1].split("/");
+            lineArrC = lines[i - 1].split("/");
 
 
-            if(lineArr[0].equals(lineArrC[0])){
+            if (lineArr[0].equals(lineArrC[0])) {
                 JOptionPane.showMessageDialog(null, "처리할 업무가 없습니다.");
                 dispose();
                 new Admin();
-            }else{
+            } else {
 
                 int temp = Integer.parseInt(lineArr[0]);
                 String fin = String.valueOf(temp);
@@ -316,10 +311,10 @@ public class ExportAdmin extends JFrame {
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "파일이 없습니다.");
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            JOptionPane.showMessageDialog(null, "문제가 발생했습니다.");
 
+        }
     }
 }

@@ -6,7 +6,6 @@ import com.kh.controller.Inquiry;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -26,26 +25,23 @@ import javax.swing.JPanel;
 public class User extends JFrame implements ActionListener {
 
     BufferedImage img = null;
-    private Image screenImage;
-    private Graphics screenGrapic;
 
-    private ImageIcon outReportImage = new ImageIcon("images/outReport.png");
-    private ImageIcon inReportImage = new ImageIcon("images/inReport.png");
-    private ImageIcon quitImage = new ImageIcon("images/quit.png");
-    private ImageIcon accuseinquiryImage = new ImageIcon("images/신고조회.png");
-    private ImageIcon outReportImage2 = new ImageIcon("images/outReport2.png");
-    private ImageIcon inReportImage2 = new ImageIcon("images/inReport2.png");
-    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
-    private ImageIcon accuseinquiryImage2 = new ImageIcon("images/신고조회2.png");
+    private final ImageIcon outReportImage = new ImageIcon("images/outReport.png");
+    private final ImageIcon inReportImage = new ImageIcon("images/inReport.png");
+    private final ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private final ImageIcon accuseInquiryImage = new ImageIcon("images/신고조회.png");
+    private final ImageIcon outReportImage2 = new ImageIcon("images/outReport2.png");
+    private final ImageIcon inReportImage2 = new ImageIcon("images/inReport2.png");
+    private final ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private final ImageIcon accuseInquiryImage2 = new ImageIcon("images/신고조회2.png");
 
 
-    private JButton quitButton = new JButton(quitImage);
-    private JButton outReportButton = new JButton(outReportImage);
-    private JButton inReportButton = new JButton(inReportImage);
-    private JButton accuseinquiryButton = new JButton(accuseinquiryImage);
+    private final JButton quitButton = new JButton(quitImage);
+    private final JButton outReportButton = new JButton(outReportImage);
+    private final JButton inReportButton = new JButton(inReportImage);
+    private final JButton accuseInquiryButton = new JButton(accuseInquiryImage);
 
     public User() {
-        JPanel pan = new JPanel();
         setTitle("수출입관리 (이용자용)");
 
         JLayeredPane lp = new JLayeredPane();
@@ -74,7 +70,6 @@ public class User extends JFrame implements ActionListener {
         // setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
 
-        // introBackground = new
         // ImageIcon(Main.class.getResource("images/introBackground.jpg")).getImage();
 
         add(quitButton);
@@ -163,22 +158,22 @@ public class User extends JFrame implements ActionListener {
 
         });
 
-        add(accuseinquiryButton);
-        accuseinquiryButton.setBounds(400, 260, 150, 75);
-        accuseinquiryButton.setBorderPainted(false);
-        accuseinquiryButton.setContentAreaFilled(false);
-        accuseinquiryButton.setFocusPainted(false);
+        add(accuseInquiryButton);
+        accuseInquiryButton.setBounds(400, 260, 150, 75);
+        accuseInquiryButton.setBorderPainted(false);
+        accuseInquiryButton.setContentAreaFilled(false);
+        accuseInquiryButton.setFocusPainted(false);
 
-        accuseinquiryButton.addMouseListener(new MouseAdapter() {
+        accuseInquiryButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                accuseinquiryButton.setIcon(accuseinquiryImage2);
-                accuseinquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                accuseInquiryButton.setIcon(accuseInquiryImage2);
+                accuseInquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                accuseinquiryButton.setIcon(accuseinquiryImage);
+                accuseInquiryButton.setIcon(accuseInquiryImage);
 
 
             }

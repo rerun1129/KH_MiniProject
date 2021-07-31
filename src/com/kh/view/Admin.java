@@ -2,7 +2,6 @@ package com.kh.view;
 
 import java.awt.Cursor;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,25 +23,23 @@ import com.kh.controller.*;
 public class Admin extends JFrame implements ActionListener {
 
     BufferedImage img = null;
-    private Image screenImage;
-    private Graphics screenGrapic;
 
-    private ImageIcon outAcsImage = new ImageIcon("images/outAcs.png");
-    private ImageIcon inAcsImage = new ImageIcon("images/inAcs.png");
-    private ImageIcon informationImage = new ImageIcon("images/information.png");
-    private ImageIcon inOutSetImage = new ImageIcon("images/inOutSet.png");
-    private ImageIcon quitImage = new ImageIcon("images/quit.png");
-    private ImageIcon outAcsImage2 = new ImageIcon("images/outAcs2.png");
-    private ImageIcon inAcsImage2 = new ImageIcon("images/inAcs2.png");
-    private ImageIcon informationImage2 = new ImageIcon("images/information2.png");
-    private ImageIcon inOutSetImage2 = new ImageIcon("images/inOutSet2.png");
-    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private final ImageIcon outAcsImage = new ImageIcon("images/outAcs.png");
+    private final ImageIcon inAcsImage = new ImageIcon("images/inAcs.png");
+    private final ImageIcon informationImage = new ImageIcon("images/information.png");
+    private final ImageIcon inOutSetImage = new ImageIcon("images/inOutSet.png");
+    private final ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private final ImageIcon outAcsImage2 = new ImageIcon("images/outAcs2.png");
+    private final ImageIcon inAcsImage2 = new ImageIcon("images/inAcs2.png");
+    private final ImageIcon informationImage2 = new ImageIcon("images/information2.png");
+    private final ImageIcon inOutSetImage2 = new ImageIcon("images/inOutSet2.png");
+    private final ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
 
-    private JButton quitButton = new JButton(quitImage);
-    private JButton outAcsButton = new JButton(outAcsImage);
-    private JButton inAcsButton = new JButton(inAcsImage);
-    private JButton inOutSetButton = new JButton(inOutSetImage);
-    private JButton informationButton = new JButton(informationImage);
+    private final JButton quitButton = new JButton(quitImage);
+    private final JButton outAcsButton = new JButton(outAcsImage);
+    private final JButton inAcsButton = new JButton(inAcsImage);
+    private final JButton inOutSetButton = new JButton(inOutSetImage);
+    private final JButton informationButton = new JButton(informationImage);
 
 
     public Admin() {

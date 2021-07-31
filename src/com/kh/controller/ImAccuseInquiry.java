@@ -12,23 +12,22 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import javax.swing.*;
 
-import com.kh.view.Admin;
 import com.kh.view.User;
 
 public class ImAccuseInquiry extends JFrame implements ActionListener {
 
 
-    private JLabel name, phoneNum;
-    private JTextField nameT, phoneNumT;
+    private final JLabel name, phoneNum;
+    private final JTextField nameT, phoneNumT;
 
 
-    private ImageIcon quitImage = new ImageIcon("images/quit.png");
-    private ImageIcon inquiryImage = new ImageIcon("images/조회버튼.png");
-    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
-    private ImageIcon inquiryImage2 = new ImageIcon("images/조회버튼2.png");
+    private final ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private final ImageIcon inquiryImage = new ImageIcon("images/조회버튼.png");
+    private final ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private final ImageIcon inquiryImage2 = new ImageIcon("images/조회버튼2.png");
 
-    private JButton quitButton = new JButton(quitImage);
-    private JButton inquiryButton = new JButton(inquiryImage);
+    private final JButton quitButton = new JButton(quitImage);
+    private final JButton inquiryButton = new JButton(inquiryImage);
 
 
     public ImAccuseInquiry() {
@@ -176,17 +175,14 @@ public class ImAccuseInquiry extends JFrame implements ActionListener {
             while ((str = br.readLine()) != null) {
                 tokens = str.split("/");
                 if (tokens[5].equals(nameT.getText()) && tokens[6].equals(phoneNumT.getText())) {
-
-
                     UIManager.put("OptionPane.messageFont",new Font("맑은 고딕",Font.BOLD,15));
                     UIManager.put("OptionPane.buttonFont",new Font("맑은 고딕",Font.BOLD,12));
                     JOptionPane.showMessageDialog(null, toString(tokens), "수입신고 허가여부", JOptionPane.PLAIN_MESSAGE);
-                    nameT.setText("");
-                    phoneNumT.setText("");
                     i = 1;
-                    break;
                 }
             }
+            nameT.setText("");
+            phoneNumT.setText("");
             if(i==0){
                 JOptionPane.showMessageDialog(null,"정확하게 입력해주세요.");
                 nameT.setText("");
