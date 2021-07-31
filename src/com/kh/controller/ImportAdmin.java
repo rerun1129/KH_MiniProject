@@ -168,12 +168,10 @@ public class ImportAdmin extends JFrame {
                         if (str1.equals(sortT.getText())) {
                             JOptionPane.showMessageDialog(null, "수입제한 물품입니다.");
                             i = 1;
-                            break;
                         }
                         if (str2.equals(sortT.getText())) {
                             JOptionPane.showMessageDialog(null, "수입금지 물품입니다.");
                             i = 2;
-                            break;
                         }
                     }
                     if (i == 0) {
@@ -272,29 +270,33 @@ public class ImportAdmin extends JFrame {
 
         int i = 0;
         String line;
-        String [] lineArrC;
+        String [] lineArrC = new String[10];
 
         try(BufferedReader br = new BufferedReader(new FileReader(file));
             BufferedReader br1 = new BufferedReader(new FileReader(file1))) {
 
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
+                System.out.println(lines[i]);
+                lineArr = lines[i].split("/");
                 i++;
             }
-            lineArr = lines[i-1].split("/");
+
             while ((line = br1.readLine())!=null){
                 lines[i] = line;
+                System.out.println(lines[i]);
+                lineArrC = lines[i].split("/");
                 i++;
             }
-            lineArrC = lines[i-1].split("/");
 
+            int temp1 = Integer.parseInt(lineArr[0]);
+            int temp2 = Integer.parseInt(lineArrC[0]);
 
             if(lineArr[0].equals(lineArrC[0])){
                 JOptionPane.showMessageDialog(null, "처리할 업무가 없습니다.");
                 dispose();
                 new Admin();
             }else{
-
                 int temp = Integer.parseInt(lineArr[0]);
                 String fin = String.valueOf(temp);
                 taskNumT.setText(fin);
@@ -307,6 +309,8 @@ public class ImportAdmin extends JFrame {
                 departureT.setText(lineArr[7]);
                 arrivalT.setText(lineArr[8]);
             }
+
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

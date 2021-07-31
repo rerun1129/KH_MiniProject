@@ -167,12 +167,10 @@ public class ExportAdmin extends JFrame {
                     if (str1.equals(sortT.getText())) {
                         JOptionPane.showMessageDialog(null, "수출제한 물품입니다.");
                         i = 1;
-                        break;
                     }
                     if (str2.equals(sortT.getText())) {
                         JOptionPane.showMessageDialog(null, "수출금지 물품입니다.");
                         i = 2;
-                        break;
                     }
                 }
                 if (i == 0) {
@@ -288,6 +286,7 @@ public class ExportAdmin extends JFrame {
                 lines[i] = line;
                 i++;
             }
+
             lineArrC = lines[i - 1].split("/");
 
 
