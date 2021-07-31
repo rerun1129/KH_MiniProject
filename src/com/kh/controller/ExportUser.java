@@ -2,13 +2,8 @@ package com.kh.controller;
 
 
 import com.kh.view.User;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-
 import javax.swing.*;
 
 public class ExportUser extends JFrame {

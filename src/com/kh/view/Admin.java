@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.kh.controller.*;
-import com.sun.tools.javac.Main;
 
 public class Admin extends JFrame implements ActionListener {
 
@@ -160,7 +159,9 @@ public class Admin extends JFrame implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 dispose();
 
-                new Inquiry();
+                new InfoSearchHome();
+
+
             }
 
         });

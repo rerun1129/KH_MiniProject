@@ -19,8 +19,6 @@ import javax.swing.JTextField;
 import com.kh.view.Admin;
 
 public class InfoSearch extends JFrame {
-    //	private JLabel sort, user, departure, arrival;
-//	private JTextField sortT, userT, departureT, arrivalT;
     private JLabel sort, user, depart, arrival;
     private JTextField sortT, userT, departT, arrivalT;
     private JButton sortBtn, userBtn, departBtn, arrivalBtn, finish;
