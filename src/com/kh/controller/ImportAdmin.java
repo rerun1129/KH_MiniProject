@@ -271,32 +271,37 @@ public class ImportAdmin extends JFrame {
         int i = 0;
         String line;
         String [] lineArrC = new String[10];
+        String [] linesC = new String[100];
+
+
 
         try(BufferedReader br = new BufferedReader(new FileReader(file));
             BufferedReader br1 = new BufferedReader(new FileReader(file1))) {
 
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
-                System.out.println(lines[i]);
                 lineArr = lines[i].split("/");
                 i++;
             }
 
             while ((line = br1.readLine())!=null){
-                lines[i] = line;
-                System.out.println(lines[i]);
-                lineArrC = lines[i].split("/");
+                linesC[i] = line;
+                lineArrC = linesC[i].split("/");
                 i++;
             }
 
             int temp1 = Integer.parseInt(lineArr[0]);
             int temp2 = Integer.parseInt(lineArrC[0]);
 
-            if(lineArr[0].equals(lineArrC[0])){
+            if(temp1==temp2){
                 JOptionPane.showMessageDialog(null, "처리할 업무가 없습니다.");
                 dispose();
                 new Admin();
-            }else{
+            }
+
+            if(temp1 > temp2){
+
+                lineArr = lines[temp2].split("/");
                 int temp = Integer.parseInt(lineArr[0]);
                 String fin = String.valueOf(temp);
                 taskNumT.setText(fin);
@@ -309,9 +314,6 @@ public class ImportAdmin extends JFrame {
                 departureT.setText(lineArr[7]);
                 arrivalT.setText(lineArr[8]);
             }
-
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
