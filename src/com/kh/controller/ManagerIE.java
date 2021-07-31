@@ -20,6 +20,7 @@ public class ManagerIE extends JFrame implements ActionListener {
     private JTextField exLimitT, imLimitT, exNotT, imNotT;
     private JButton addBtn1, addBtn2, addBtn3, addBtn4, delBtn1, delBtn2, delBtn3, delBtn4;
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
 
     private JButton quitButton = new JButton(quitImage);
 
@@ -171,8 +172,15 @@ public class ManagerIE extends JFrame implements ActionListener {
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                quitButton.setIcon(quitImage2);
                 quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                quitButton.setIcon(quitImage);
+
 
             }
 

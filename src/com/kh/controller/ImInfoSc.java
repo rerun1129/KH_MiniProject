@@ -51,6 +51,7 @@ public class ImInfoSc extends JFrame {
         arrivalBtn = new JButton("조회");
 
         ImageIcon myImg = new ImageIcon("images/quit.png");
+        ImageIcon myImg2 = new ImageIcon("images/quit2.png");
         finish = new JButton(myImg);
         finish.setBorderPainted(false);
         finish.setContentAreaFilled(false);
@@ -89,9 +90,16 @@ public class ImInfoSc extends JFrame {
         finish.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                finish.setIcon(myImg2);
                 finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
+                finish.setIcon(myImg);
+
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감

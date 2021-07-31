@@ -32,6 +32,11 @@ public class Admin extends JFrame implements ActionListener {
     private ImageIcon informationImage = new ImageIcon("images/information.png");
     private ImageIcon inOutSetImage = new ImageIcon("images/inOutSet.png");
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
+    private ImageIcon outAcsImage2 = new ImageIcon("images/outAcs2.png");
+    private ImageIcon inAcsImage2 = new ImageIcon("images/inAcs2.png");
+    private ImageIcon informationImage2 = new ImageIcon("images/information2.png");
+    private ImageIcon inOutSetImage2 = new ImageIcon("images/inOutSet2.png");
+    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
 
     private JButton quitButton = new JButton(quitImage);
     private JButton outAcsButton = new JButton(outAcsImage);
@@ -79,8 +84,15 @@ public class Admin extends JFrame implements ActionListener {
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                quitButton.setIcon(quitImage2);
                 quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                quitButton.setIcon(quitImage);
+
 
             }
 
@@ -101,8 +113,16 @@ public class Admin extends JFrame implements ActionListener {
         outAcsButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                outAcsButton.setIcon(outAcsImage2);
                 outAcsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                outAcsButton.setIcon(outAcsImage);
+
 
             }
 
@@ -126,8 +146,16 @@ public class Admin extends JFrame implements ActionListener {
         inAcsButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                inAcsButton.setIcon(inAcsImage2);
                 inAcsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                inAcsButton.setIcon(inAcsImage);
+
 
             }
 
@@ -150,8 +178,16 @@ public class Admin extends JFrame implements ActionListener {
         informationButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                informationButton.setIcon(informationImage2);
                 informationButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                informationButton.setIcon(informationImage);
+
 
             }
 
@@ -176,8 +212,15 @@ public class Admin extends JFrame implements ActionListener {
         inOutSetButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                inOutSetButton.setIcon(inOutSetImage2);
                 inOutSetButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                inOutSetButton.setIcon(inOutSetImage);
+
 
             }
 

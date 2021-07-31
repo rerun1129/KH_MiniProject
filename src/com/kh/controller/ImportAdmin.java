@@ -248,7 +248,7 @@ public class ImportAdmin extends JFrame {
                     String[] split = str.split("/");
                     spInt[j] = Integer.parseInt(split[0]);
                     if (spInt[j] == number) {
-                        bw.write(str+"/(불허사유) "+strWhy);
+                        bw.write(str + "/(불허사유) " + strWhy);
                         break;
                     }
                 }
@@ -266,6 +266,8 @@ public class ImportAdmin extends JFrame {
             new Admin();
 
         });
+
+        fileIn();
     }
 
     public void fileIn() {
@@ -303,8 +305,23 @@ public class ImportAdmin extends JFrame {
 
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
-            JOptionPane.showMessageDialog(null, "잘못된 번호입니다.");
-            System.exit(0);
+
+            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(초기 화면으로)", "확인", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.CLOSED_OPTION) {
+                dispose();
+                new Admin();
+
+
+            } else if (result == JOptionPane.YES_OPTION) {
+                dispose();
+                new ImportAdmin();
+
+            } else {
+
+                dispose();
+                new Admin();
+
+            }
         }
     }
 }

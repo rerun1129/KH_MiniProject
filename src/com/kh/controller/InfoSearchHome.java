@@ -26,12 +26,14 @@ public class InfoSearchHome extends JFrame {
         JLabel label = new JLabel();
 
         ImageIcon myImg1 = new ImageIcon("images/수출정보조회.png");
+        ImageIcon myImg1_2 = new ImageIcon("images/수출정보조회2.png");
         exInfoBtn = new JButton(myImg1);
         exInfoBtn.setBorderPainted(false);
         exInfoBtn.setContentAreaFilled(false);
         exInfoBtn.setFocusPainted(false);
 
         ImageIcon myImg2 = new ImageIcon("images/수입정보조회.png");
+        ImageIcon myImg2_2 = new ImageIcon("images/수입정보조회2.png");
         inInfoBtn = new JButton(myImg2);
         inInfoBtn.setBorderPainted(false);
         inInfoBtn.setContentAreaFilled(false);
@@ -39,17 +41,25 @@ public class InfoSearchHome extends JFrame {
 
 
         ImageIcon myImg3 = new ImageIcon("images/quit.png");
+        ImageIcon myImg3_2 = new ImageIcon("images/quit2.png");
         finish = new JButton(myImg3);
         finish.setBorderPainted(false);
         finish.setContentAreaFilled(false);
         finish.setFocusPainted(false);
 
-
         // 수출 정보 액션
         exInfoBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                exInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                exInfoBtn.setIcon(myImg1_2);
+                finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exInfoBtn.setIcon(myImg1);
+
+
             }
 
             @Override
@@ -64,9 +74,17 @@ public class InfoSearchHome extends JFrame {
         inInfoBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                inInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                inInfoBtn.setIcon(myImg2_2);
+                finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                inInfoBtn.setIcon(myImg2);
+
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
 
@@ -81,9 +99,17 @@ public class InfoSearchHome extends JFrame {
         finish.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                finish.setIcon(myImg3_2);
                 finish.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                finish.setIcon(myImg3);
+
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose(); // 홈으로 돌아감

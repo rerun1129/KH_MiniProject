@@ -33,6 +33,11 @@ public class User extends JFrame implements ActionListener {
     private ImageIcon inReportImage = new ImageIcon("images/inReport.png");
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
     private ImageIcon accuseinquiryImage = new ImageIcon("images/신고조회.png");
+    private ImageIcon outReportImage2 = new ImageIcon("images/outReport2.png");
+    private ImageIcon inReportImage2 = new ImageIcon("images/inReport2.png");
+    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private ImageIcon accuseinquiryImage2 = new ImageIcon("images/신고조회2.png");
+
 
     private JButton quitButton = new JButton(quitImage);
     private JButton outReportButton = new JButton(outReportImage);
@@ -81,8 +86,15 @@ public class User extends JFrame implements ActionListener {
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                quitButton.setIcon(quitImage2);
                 quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                quitButton.setIcon(quitImage);
+
 
             }
 
@@ -102,8 +114,14 @@ public class User extends JFrame implements ActionListener {
         outReportButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                outReportButton.setIcon(outReportImage2);
                 outReportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                outReportButton.setIcon(outReportImage);
+
 
             }
 
@@ -125,8 +143,14 @@ public class User extends JFrame implements ActionListener {
         inReportButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                inReportButton.setIcon(inReportImage2);
                 inReportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                inReportButton.setIcon(inReportImage);
+
 
             }
 
@@ -148,11 +172,16 @@ public class User extends JFrame implements ActionListener {
         accuseinquiryButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                accuseinquiryButton.setIcon(accuseinquiryImage2);
                 accuseinquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                accuseinquiryButton.setIcon(accuseinquiryImage);
 
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose();

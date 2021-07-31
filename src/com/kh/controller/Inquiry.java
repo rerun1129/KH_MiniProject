@@ -15,6 +15,9 @@ public class Inquiry extends JFrame {
     private ImageIcon quitButtonImage = new ImageIcon("images/quit.png");
     private ImageIcon exAccuseImage = new ImageIcon("images/수출신고조회.png");
     private ImageIcon imAccuseImage = new ImageIcon("images/수입신고조회.png");
+    private ImageIcon quitButtonImage2 = new ImageIcon("images/quit2.png");
+    private ImageIcon exAccuseImage2 = new ImageIcon("images/수출신고조회2.png");
+    private ImageIcon imAccuseImage2 = new ImageIcon("images/수입신고조회2.png");
 
 
     private JButton quitButton = new JButton(quitButtonImage);
@@ -48,9 +51,16 @@ public class Inquiry extends JFrame {
         exAccuse.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                exAccuse.setIcon(exAccuseImage2);
                 exAccuse.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
 
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exAccuse.setIcon(exAccuseImage);
+
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose();
@@ -67,9 +77,15 @@ public class Inquiry extends JFrame {
         imAccuse.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
+                imAccuse.setIcon(imAccuseImage2);
                 imAccuse.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imAccuse.setIcon(imAccuseImage);
 
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose();
@@ -89,8 +105,14 @@ public class Inquiry extends JFrame {
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                quitButton.setIcon(quitButtonImage2);
                 quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                quitButton.setIcon(quitButtonImage);
+
 
             }
 

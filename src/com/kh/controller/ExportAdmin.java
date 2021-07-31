@@ -118,6 +118,8 @@ public class ExportAdmin extends JFrame {
         departureT.setEditable(false);
         arrivalT.setEditable(false);
 
+
+        fileIn();
         add(name);
         add(sort);
         add(quantity);
@@ -140,7 +142,6 @@ public class ExportAdmin extends JFrame {
         add(cancel);
         add(panel);
 
-        fileIn();
 
         panel.setBounds(0, 0, 960, 550);
 
@@ -150,7 +151,6 @@ public class ExportAdmin extends JFrame {
         setVisible(true);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 
 
         accept.addActionListener(new ActionListener() {
@@ -266,19 +266,21 @@ public class ExportAdmin extends JFrame {
             new Admin();
 
         });
+
+        fileIn();
     }
 
 
     public void fileIn() {
 
-        File file = new File("src/com/kh/dat/exportConfirm.dat");
-        File file1 = new File("src/com/kh/dat/exportInfo.dat");
+
+        File file = new File("src/com/kh/dat/exportInfo.dat");
 
 
         int i = 0;
         String line;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file1))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
 
@@ -303,19 +305,23 @@ public class ExportAdmin extends JFrame {
             departureT.setText(lineArr[7]);
             arrivalT.setText(lineArr[8]);
 
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            JOptionPane.showMessageDialog(null, "초과된 번호입니다.");
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException exception) {
 
 
-        } catch (NullPointerException exception) {
-            JOptionPane.showMessageDialog(null, "없는 번호입니다.");
+            int result = JOptionPane.showConfirmDialog(null, "번호가 잘못되었습니다, 다시 입력하시겠습니까?\nYES(다시 입력)   NO(초기화면)", "확인", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.CLOSED_OPTION) {
+                dispose();
+                new Admin();
 
+            } else if (result == JOptionPane.YES_OPTION) {
 
-        } catch (NumberFormatException exception) {
-            JOptionPane.showMessageDialog(null, "취소하셨습니다.");
+                dispose();
+                new ExportAdmin();
 
-
+            } else {
+                dispose();
+                new Admin();
+            }
         }
     }
 }
-

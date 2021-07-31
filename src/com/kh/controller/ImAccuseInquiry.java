@@ -24,6 +24,8 @@ public class ImAccuseInquiry extends JFrame implements ActionListener {
 
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
     private ImageIcon inquiryImage = new ImageIcon("images/조회버튼.png");
+    private ImageIcon quitImage2 = new ImageIcon("images/quit2.png");
+    private ImageIcon inquiryImage2 = new ImageIcon("images/조회버튼2.png");
 
     private JButton quitButton = new JButton(quitImage);
     private JButton inquiryButton = new JButton(inquiryImage);
@@ -54,11 +56,16 @@ public class ImAccuseInquiry extends JFrame implements ActionListener {
         inquiryButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                inquiryButton.setIcon(inquiryImage2);
                 inquiryButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                inquiryButton.setIcon(inquiryImage);
 
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
 
@@ -72,11 +79,16 @@ public class ImAccuseInquiry extends JFrame implements ActionListener {
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                quitButton.setIcon(quitImage2);
                 quitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
             }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                quitButton.setIcon(quitImage);
 
+
+            }
             @Override
             public void mousePressed(MouseEvent e) {
                 dispose();
