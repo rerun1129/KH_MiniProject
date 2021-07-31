@@ -1,4 +1,4 @@
-package com.kh.model.vo;
+package com.kh.model.dao;
 
 
 import javax.swing.*;
@@ -8,8 +8,8 @@ public class LimitList {
 
 
     public void EI(String exI) {
-        try (FileWriter fw = new FileWriter("exportInhibit.txt", true);
-             BufferedReader br = new BufferedReader(new FileReader("exportInhibit.txt"))) {
+        try (FileWriter fw = new FileWriter("src/com/kh/dat/exportInhibit.dat", true);
+             BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportInhibit.dat"))) {
             String str;
             while ((str = br.readLine()) != null) {
                 if (exI.length() == 0) {
@@ -32,8 +32,8 @@ public class LimitList {
 
 
     public void II(String imI) {
-        try (FileWriter fw = new FileWriter("importInhibit.txt", true);
-             BufferedReader br = new BufferedReader(new FileReader("importInhibit.txt"))) {
+        try (FileWriter fw = new FileWriter("src/com/kh/dat/importInhibit.dat", true);
+             BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/importInhibit.dat"))) {
             String str;
             while ((str = br.readLine()) != null) {
                 if (imI.length() == 0) {
@@ -56,8 +56,8 @@ public class LimitList {
 
 
     public void EL(String exL) {
-        try (FileWriter fw = new FileWriter("exportLimit.txt", true);
-             BufferedReader br = new BufferedReader(new FileReader("exportLimit.txt"))) {
+        try (FileWriter fw = new FileWriter("src/com/kh/dat/exportLimit.dat", true);
+             BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportLimit.dat"))) {
             String str;
             while ((str = br.readLine()) != null) {
                 if (exL.length() == 0) {
@@ -80,8 +80,8 @@ public class LimitList {
 
 
     public void IL(String imL) {
-        try (FileWriter fw = new FileWriter("importLimit.txt", true);
-             BufferedReader br = new BufferedReader(new FileReader("importLimit.txt"))) {
+        try (FileWriter fw = new FileWriter("src/com/kh/dat/importLimit.dat", true);
+             BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/importLimit.dat"))) {
             String str;
             while ((str = br.readLine()) != null) {
                 if (imL.length() == 0) {
@@ -104,8 +104,8 @@ public class LimitList {
 
     public void ELD(String exL) {
 
-        File inventory = new File("exportLimit.txt");
-        File temp = new File("deletedAfter.txt");
+        File inventory = new File("src/com/kh/dat/exportLimit.dat");
+        File temp = new File("src/com/kh/dat/deletedAfter.txt");
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
              BufferedReader br = new BufferedReader(new FileReader(inventory))) {
@@ -138,8 +138,8 @@ public class LimitList {
 
     public void EID(String exI) {
 
-        File inventory = new File("exportInhibit.txt");
-        File temp = new File("deletedAfter.txt");
+        File inventory = new File("src/com/kh/dat/exportInhibit.dat");
+        File temp = new File("src/com/kh/dat/deletedAfter.txt");
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
              BufferedReader br = new BufferedReader(new FileReader(inventory))) {
@@ -171,8 +171,8 @@ public class LimitList {
     }
 
     public void IID(String imI) {
-        File inventory = new File("importInhibit.txt");
-        File temp = new File("deletedAfter.txt");
+        File inventory = new File("src/com/kh/dat/importInhibit.dat");
+        File temp = new File("src/com/kh/dat/deletedAfter.txt");
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
              BufferedReader br = new BufferedReader(new FileReader(inventory))) {
@@ -204,8 +204,8 @@ public class LimitList {
     }
 
     public void ILD(String imL) {
-        File inventory = new File("importLimit.txt");
-        File temp = new File("deletedAfter.txt");
+        File inventory = new File("src/com/kh/dat/importLimit.dat");
+        File temp = new File("src/com/kh/dat/deletedAfter.txt");
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
              BufferedReader br = new BufferedReader(new FileReader(inventory))) {
@@ -235,5 +235,9 @@ public class LimitList {
         inventory.delete();
         temp.renameTo(inventory);
     }
+
+
+
+
 }
 

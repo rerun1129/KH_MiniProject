@@ -1,34 +1,17 @@
 package com.kh.controller;
 
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-import com.kh.model.vo.LimitList;
+import com.kh.model.dao.LimitList;
 import com.kh.view.Admin;
-import com.kh.view.User;
 
 public class ManagerIE extends JFrame implements ActionListener {
 
@@ -39,6 +22,7 @@ public class ManagerIE extends JFrame implements ActionListener {
     private ImageIcon quitImage = new ImageIcon("images/quit.png");
 
     private JButton quitButton = new JButton(quitImage);
+
 
     LimitList ll = new LimitList();
 
@@ -124,6 +108,66 @@ public class ManagerIE extends JFrame implements ActionListener {
         });
 
 
+        exLimit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                elInquiry();
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                exLimit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+        });
+
+
+        exNot.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                eIInquiry();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+                exNot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+            }
+        });
+
+        imLimit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                iLInquiry();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imLimit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+
+        imNot.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                iIInquiry();
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imNot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+
+
+
+
         quitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -142,10 +186,10 @@ public class ManagerIE extends JFrame implements ActionListener {
         });
 
 
-        exLimit.setBounds(20, 160, 400, 25);
-        imLimit.setBounds(20, 220, 400, 25);
-        exNot.setBounds(20, 280, 400, 25);
-        imNot.setBounds(20, 340, 400, 25);
+        exLimit.setBounds(20, 160, 220, 25);
+        imLimit.setBounds(20, 220, 220, 25);
+        exNot.setBounds(20, 280, 220, 25);
+        imNot.setBounds(20, 340, 220, 25);
 
 
         exLimitT.setBounds(250, 160, 550, 25);
@@ -166,6 +210,7 @@ public class ManagerIE extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.add(label);
 
+
         exLimit.setFont(f);
         imLimit.setFont(f);
         exNot.setFont(f);
@@ -184,6 +229,7 @@ public class ManagerIE extends JFrame implements ActionListener {
         exNot.setForeground(Color.white);
         imNot.setForeground(Color.white);
 
+
         add(exLimit);
         add(imLimit);
         add(exNot);
@@ -193,7 +239,6 @@ public class ManagerIE extends JFrame implements ActionListener {
         add(imLimitT);
         add(exNotT);
         add(imNotT);
-
 
 
         add(addBtn1);
@@ -230,5 +275,110 @@ public class ManagerIE extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
+
+
+    public void elInquiry() {
+
+        File file = new File("src/com/kh/dat/exportLimit.dat");
+        int i = 0;
+        String line;
+        int len = 100;
+        String[] lines = new String[len];
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+            UIManager.put("OptionPane.messageFont", new Font("맑은 고딕",Font.BOLD,15));
+            UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕",Font.BOLD,12));
+            JOptionPane.showMessageDialog(null, lines, "수출제한목록", JOptionPane.PLAIN_MESSAGE);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void eIInquiry() {
+
+        File file = new File("src/com/kh/dat/exportInhibit.dat");
+        int i = 0;
+        String line;
+        int len = 100;
+        String[] lines = new String[len];
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+
+            UIManager.put("OptionPane.messageFont", new Font("맑은 고딕",Font.BOLD,15));
+            UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕",Font.BOLD,12));
+            JOptionPane.showMessageDialog(null, lines, "수출금지목록", JOptionPane.PLAIN_MESSAGE);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void iLInquiry() {
+
+        File file = new File("src/com/kh/dat/importLimit.dat");
+        int i = 0;
+        String line;
+        int len = 100;
+        String[] lines = new String[len];
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+
+            UIManager.put("OptionPane.messageFont", new Font("맑은 고딕",Font.BOLD,15));
+            UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕",Font.BOLD,12));
+            JOptionPane.showMessageDialog(null, lines, "수입제한목록", JOptionPane.PLAIN_MESSAGE);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void iIInquiry() {
+
+        File file = new File("src/com/kh/dat/importInhibit.dat");
+        int i = 0;
+        String line;
+        int len = 100;
+        String[] lines = new String[len];
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((line = br.readLine()) != null) {
+                lines[i] = line;
+                i++;
+            }
+
+            UIManager.put("OptionPane.messageFont", new Font("맑은 고딕",Font.BOLD,15));
+            UIManager.put("OptionPane.buttonFont", new Font("맑은 고딕",Font.BOLD,12));
+            JOptionPane.showMessageDialog(null, lines, "수입제한목록", JOptionPane.PLAIN_MESSAGE);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }

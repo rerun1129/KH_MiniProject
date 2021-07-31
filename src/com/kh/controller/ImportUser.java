@@ -1,7 +1,6 @@
 package com.kh.controller;
 
-import com.kh.model.vo.ExportAccuseInfo;
-import com.kh.model.vo.ImportAccuseInfo;
+
 import com.kh.view.User;
 
 import java.awt.Color;
@@ -153,32 +152,34 @@ public class ImportUser extends JFrame {
         accuse.addActionListener(e -> {
 
 
-            JOptionPane.showMessageDialog(null, "수입신고가 완료되었습니다.");
+            File file = new File("src/com/kh/dat/importInfo.dat");
 
-            File file = new File("importInfo.dat");
+            try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true))) {
 
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(file,true));
+                if(nameT.getText().length() == 0 || sortT.getText().length() == 0 ||quantityT.getText().length() == 0 || priceT.getText().length() == 0|| userT.getText().length() == 0 ||phoneNumT.getText().length()==0||
+                        departureT.getText().length()==0||arrivalT.getText().length() == 0){
+                    JOptionPane.showMessageDialog(null, "각 항목이 공백이 없게 작성해주세요.");
+                }else{
+                    bw.write(taskNumT.getText() + "/");
+                    bw.write(nameT.getText() + "/");
+                    bw.write(sortT.getText() + "/");
+                    bw.write(quantityT.getText() + "/");
+                    bw.write(priceT.getText() + "/");
+                    bw.write(userT.getText() + "/");
+                    bw.write(phoneNumT.getText() + "/");
+                    bw.write(departureT.getText() + "/");
+                    bw.write(arrivalT.getText());
+                    bw.write("\r\n");
+                    bw.flush();
+                    JOptionPane.showMessageDialog(null, "수입신고가 완료되었습니다.");
 
-                bw.write(taskNumT.getText()+"/");
-                bw.write(nameT.getText()+"/");
-                bw.write(sortT.getText()+"/");
-                bw.write(quantityT.getText()+"/");
-                bw.write(priceT.getText()+"/");
-                bw.write(userT.getText()+"/");
-                bw.write(phoneNumT.getText()+"/");
-                bw.write(departureT.getText()+"/");
-                bw.write(arrivalT.getText());
-                bw.write("\r\n");
-                bw.flush();
+                    dispose();
 
+                    new User();
+                }
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-
-            dispose();
-
-            new User();
 
         });
 
@@ -196,12 +197,11 @@ public class ImportUser extends JFrame {
     }
     public void autoIncrement() {
 
-        File file = new File("importInfo.dat");
+        File file = new File("src/com/kh/dat/importInfo.dat");
         int i = 0;
         String line;
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
                 i++;

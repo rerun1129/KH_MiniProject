@@ -1,8 +1,6 @@
 package com.kh.controller;
 
 
-import com.kh.model.dao.FileIO;
-import com.kh.model.vo.ImportAllowInfo;
 import com.kh.view.Admin;
 
 import javax.swing.*;
@@ -112,6 +110,14 @@ public class ImportAdmin extends JFrame {
         departure.setForeground(Color.white);
         arrival.setForeground(Color.white);
 
+        nameT.setEditable(false);
+        sortT.setEditable(false);
+        quantityT.setEditable(false);
+        priceT.setEditable(false);
+        userT.setEditable(false);
+        phoneNumT.setEditable(false);
+        departureT.setEditable(false);
+        arrivalT.setEditable(false);
 
 
         add(name);
@@ -150,7 +156,7 @@ public class ImportAdmin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                try (BufferedReader br = new BufferedReader(new FileReader("importLimit.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/importLimit.dat"))) {
                     String str;
                     while ((str = br.readLine()) != null){
                         if(str.equals(sortT.getText())){
@@ -162,7 +168,7 @@ public class ImportAdmin extends JFrame {
                     fileNotFoundException.printStackTrace();
                 }
 
-                try (BufferedReader br = new BufferedReader(new FileReader("importInhibit.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/importInhibit.dat"))) {
                     String str;
                     while ((str = br.readLine()) != null){
                         if(str.equals(sortT.getText())){
@@ -187,6 +193,14 @@ public class ImportAdmin extends JFrame {
 
             JOptionPane.showMessageDialog(null, "수입신고가 불허되었습니다.");
 
+
+
+
+
+
+
+
+
             dispose();
 
             new Admin();
@@ -196,12 +210,11 @@ public class ImportAdmin extends JFrame {
 
     public void fileIn() {
 
-        File file = new File("importInfo.dat");
+        File file = new File("src/com/kh/dat/importInfo.dat");
         int i = 0;
         String line;
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
 
@@ -232,6 +245,27 @@ public class ImportAdmin extends JFrame {
             System.exit(0);
 
         }
+    }
+
+    public void fileOut(){
+
+        File file = new File("src/com/kh/dat/importConfirm.dat");
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
     }
 }
 

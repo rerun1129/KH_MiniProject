@@ -1,7 +1,7 @@
 package com.kh.controller;
 
 
-import com.kh.model.dao.FileIO;
+
 import com.kh.model.vo.*;
 import com.kh.view.Admin;
 
@@ -70,11 +70,10 @@ public class ExportAdmin extends JFrame {
         departureT = new JTextField(20);
         arrivalT = new JTextField(20);
 
-        cancel = new JButton();
-
 
         accept = new JButton("신고처리");
         cancel = new JButton("불허");
+
 
         name.setBounds(20, 120, 400, 25);
         sort.setBounds(20, 160, 400, 25);
@@ -169,7 +168,7 @@ public class ExportAdmin extends JFrame {
         accept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try (BufferedReader br = new BufferedReader(new FileReader("exportLimit.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportLimit.dat"))) {
                     String str;
                     while ((str = br.readLine()) != null) {
                         if (str.equals(sortT.getText())) {
@@ -181,14 +180,14 @@ public class ExportAdmin extends JFrame {
                     fileNotFoundException.printStackTrace();
                 }
 
-                try (BufferedReader br = new BufferedReader(new FileReader("exportInhibit.txt"))) {
+                try (BufferedReader br = new BufferedReader(new FileReader("src/com/kh/dat/exportInhibit.dat"))) {
                     String str;
                     while ((str = br.readLine()) != null) {
                         if (str.equals(sortT.getText())) {
                             JOptionPane.showMessageDialog(null, "수출금지 물품입니다.");
                             break;
                         }
-                    }//todo 수입신고 허가 팝업은 안될듯?
+                    }
 
                 } catch (IOException fileNotFoundException) {
                     fileNotFoundException.printStackTrace();
@@ -216,12 +215,11 @@ public class ExportAdmin extends JFrame {
 
     public void fileIn() {
 
-        File file = new File("exportInfo.dat");
+        File file = new File("src/com/kh/dat/exportInfo.dat");
         int i = 0;
         String line;
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){
             while ((line = br.readLine()) != null) {
                 lines[i] = line;
 
